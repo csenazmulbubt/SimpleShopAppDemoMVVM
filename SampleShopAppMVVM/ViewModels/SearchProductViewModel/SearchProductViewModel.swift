@@ -51,7 +51,7 @@ class SearchProductViewModel {
                             searchText: String = "") -> Void {
         
         self.searchText = searchText
-        debounce.dispatch {
+        self.debounce.dispatch {
             if !self.searchText.isEmpty {
                 self.reset()
                 self.requestForSearchProduct(URLReuquestBuilder: URLReuquestBuilder)

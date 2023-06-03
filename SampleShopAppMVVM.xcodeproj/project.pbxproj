@@ -213,12 +213,12 @@
 			path = SearchProductViewModel;
 			sourceTree = "<group>";
 		};
-		007AC4572A2BCED5007C1B1F /* Debouncing */ = {
+		007AC4572A2BCED5007C1B1F /* Debounce */ = {
 			isa = PBXGroup;
 			children = (
 				007AC4582A2BCEEA007C1B1F /* Debounce.swift */,
 			);
-			path = Debouncing;
+			path = Debounce;
 			sourceTree = "<group>";
 		};
 		0089F0462A2A4F2800E1F146 /* ProductColletionViewCell */ = {
@@ -342,7 +342,7 @@
 		00A4483629FA842000D51AE7 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				007AC4572A2BCED5007C1B1F /* Debouncing */,
+				007AC4572A2BCED5007C1B1F /* Debounce */,
 				007AC4492A2B8D1F007C1B1F /* ViewController + Utility */,
 				003AC1D72A29EA62002A5A32 /* JSONEncodingDecoding */,
 				00C975E62A285BA900EBA38D /* Extentions */,
