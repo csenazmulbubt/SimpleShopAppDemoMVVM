@@ -31,22 +31,20 @@ class ProductViewModel {
     
     func startProductRequest(URLReuquestBuilder: URLRequestBuilder) {
         
-        if currentResponseStatus != .loading {
-            self.delegate?.didReceiveProductResponseStatus(.loading)
-            self.networkService.sendGetRequest(URLReuquestBuilder: URLReuquestBuilder,
-                                               decodingType: Products.self) {
-                [weak self] result in
-                guard let self = self else { return }
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success(let products):
-                        self.currentResponseStatus = .success
-                        self.calculateMorePage(newProducts: products)
-                    case .failure(let error):
-                        self.currentResponseStatus = .failure(error.localizedDescription)
-                    }
-                    self.delegate?.didReceiveProductResponseStatus(self.currentResponseStatus)
+        self.delegate?.didReceiveProductResponseStatus(.loading)
+        self.networkService.sendGetRequest(URLReuquestBuilder: URLReuquestBuilder,
+                                           decodingType: Products.self) {
+            [weak self] result in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let products):
+                    self.currentResponseStatus = .success
+                    self.calculateMorePage(newProducts: products)
+                case .failure(let error):
+                    self.currentResponseStatus = .failure(error.localizedDescription)
                 }
+                self.delegate?.didReceiveProductResponseStatus(self.currentResponseStatus)
             }
         }
     }

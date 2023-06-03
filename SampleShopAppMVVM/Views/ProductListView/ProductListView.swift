@@ -15,6 +15,7 @@ class ProductListView: UIView {
     private let section = 2
     
     let productViewModel = ProductViewModel(NetworkService())
+    let debounce = Debounce(timeInterval: 1.0, queue: .global(qos: .userInitiated))
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -51,7 +52,9 @@ class ProductListView: UIView {
                                                                         scheme: .https,
                                                                         endPath: ProductPathRequestType.getProducts.path,
                                                                         headers: nil)
-        self.productViewModel.startProductRequest(URLReuquestBuilder: URLRequestBuilder)
+        self.debounce.dispatch {
+            self.productViewModel.startProductRequest(URLReuquestBuilder: URLRequestBuilder)
+        }
     }
 }
 
@@ -132,14 +135,15 @@ extension ProductListView: UICollectionViewDelegateFlowLayout {
 extension ProductListView: ProductViewModelDelegate {
     
     func didReceiveProductResponseStatus(_ Response: ResoponseStatus) {
-        switch Response {
-        case .loading:
-            break
-        case .success:
-            print("Product",productViewModel.hasMorePage)
-            self.productCollectionView.reloadData()
-        case .failure(let error):
-            print("Error",error)
+        DispatchQueue.main.async {
+            switch Response {
+            case .loading:
+                break
+            case .success:
+                self.productCollectionView.reloadData()
+            case .failure(let error):
+                print("Error",error)
+            }
         }
     }
 }

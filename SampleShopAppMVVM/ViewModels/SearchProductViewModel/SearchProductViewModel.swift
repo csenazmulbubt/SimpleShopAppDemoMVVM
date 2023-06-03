@@ -17,10 +17,10 @@ class SearchProductViewModel {
     
     private let networkService: NetworkServiceProtcol
     private var products: Products? = nil
-    public var hasMorePage: Bool = false
-    public var productArray: [Product] = []
     private var currentResponseStatus: ResoponseStatus = .success
     private var searchText: String = ""
+    public var hasMorePage: Bool = false
+    public var productArray: [Product] = []
     
     let debounce = Debounce(timeInterval: 0.5, queue: .global(qos: .userInitiated))
     
@@ -89,9 +89,11 @@ class SearchProductViewModel {
     }
     
     func loadMorePage(URLReuquestBuilder: URLRequestBuilder) -> Void {
-        self.currentResponseStatus = .loading
-        if !searchText.isEmpty {
-            self.sendRequest(URLReuquestBuilder: URLReuquestBuilder)
+        debounce.dispatch {
+            self.currentResponseStatus = .loading
+            if !self.searchText.isEmpty {
+                self.sendRequest(URLReuquestBuilder: URLReuquestBuilder)
+            }
         }
     }
     

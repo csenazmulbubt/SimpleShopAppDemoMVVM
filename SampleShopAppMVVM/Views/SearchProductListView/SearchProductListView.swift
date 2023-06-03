@@ -201,6 +201,7 @@ extension SearchProductListView: UICollectionViewDelegateFlowLayout {
     }
 }
 
+//MARK: - SearchProductViewModelDelegate
 extension SearchProductListView: SearchProductViewModelDelegate {
     func didReceiveProductResponseStatus(_ response: ResoponseStatus) {
         DispatchQueue.main.async {
