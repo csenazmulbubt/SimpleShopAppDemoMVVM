@@ -24,7 +24,7 @@ class SearchProductListView: UIView {
     weak var delegate: SearchProductListViewDelegate? = nil
     
     private let section = 2
-    private let searchViewModel = SearchProductViewModel(NetworkService())
+    private let searchProductListViewModel = SearchProductListViewModel(NetworkService())
     private var searchText: String = ""
     
     override init(frame: CGRect) {
@@ -49,7 +49,7 @@ class SearchProductListView: UIView {
         productCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 300, right: 0)
         self.activityIndicatorCV.isHidden = true
         self.productCollectionCV.isHidden = true
-        self.searchViewModel.delegate = self
+        self.searchProductListViewModel.delegate = self
         self.setupSearchBar()
         self.productCollectionView.register(UINib(nibName: ProductCollectionViewCell.cellReuseIdentifier, bundle: nil), forCellWithReuseIdentifier: ProductCollectionViewCell.cellReuseIdentifier)
         
@@ -76,17 +76,17 @@ class SearchProductListView: UIView {
     private func startSearch(isNeedLoadMorePage: Bool = false) -> Void {
         var paraDict: [String: String] = ["limit": "10"]
         paraDict["q"] = self.searchText
-        let URLRequestBuilder = searchViewModel.makeURLRequestBuilder(paraDict,
+        let URLRequestBuilder = searchProductListViewModel.makeURLRequestBuilder(paraDict,
                                                                         httpMethod: .get,
                                                                         host: .dummyHost,
                                                                         scheme: .https,
                                                                         endPath: ProductPathRequestType.searchProduct.path,
                                                                         headers: nil)
         if !isNeedLoadMorePage {
-            self.searchViewModel.startSearchRequest(URLReuquestBuilder: URLRequestBuilder, searchText: searchText)
+            self.searchProductListViewModel.startSearchRequest(URLReuquestBuilder: URLRequestBuilder, searchText: searchText)
             return
         }
-        self.searchViewModel.loadMorePage(URLReuquestBuilder: URLRequestBuilder)
+        self.searchProductListViewModel.loadMorePage(URLReuquestBuilder: URLRequestBuilder)
     }
     
     private func startLoading() -> Void {
@@ -94,11 +94,10 @@ class SearchProductListView: UIView {
         activityIndicatorCV.isHidden = false
         noProductFoundLabel.isHidden = true
         activityIndicator.startAnimating()
-        productCollectionView.reloadData()
     }
     
     private func startSuccess() -> Void {
-        self.searchViewModel.isAvailableProduct ?
+        self.searchProductListViewModel.isAvailableProduct ?
         setupNoProductView(error: "No Product Found"): setupCollectionView()
     }
     
@@ -107,7 +106,6 @@ class SearchProductListView: UIView {
         activityIndicatorCV.isHidden = true
         noProductFoundLabel.isHidden = true
         productCollectionCV.isHidden = false
-        productCollectionView.reloadData()
     }
     
     private func setupNoProductView(error: String) -> Void {
@@ -116,7 +114,6 @@ class SearchProductListView: UIView {
         activityIndicatorCV.isHidden = false
         noProductFoundLabel.isHidden = false
         noProductFoundLabel.text = error
-        //productCollectionView.reloadData()
     }
 }
 
@@ -139,7 +136,7 @@ extension SearchProductListView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if section == 0 {
-            return searchViewModel.productArray.count
+            return searchProductListViewModel.productArray.count
         }
         return 1
     }
@@ -149,13 +146,13 @@ extension SearchProductListView: UICollectionViewDataSource {
         if indexPath.section == 0 {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCollectionViewCell.cellReuseIdentifier, for: indexPath) as? ProductCollectionViewCell
             else { return  UICollectionViewCell() }
-            cell.setupCell(product: searchViewModel.productArray[indexPath.item])
+            cell.setupCell(product: searchProductListViewModel.productArray[safe: indexPath.item])
             return cell
         }
         else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IndicatorCollectionViewCell.cellReuseIdentifier, for: indexPath) as? IndicatorCollectionViewCell
             else { return  UICollectionViewCell() }
-            cell.isShowIndicator = self.searchViewModel.hasMorePage
+            cell.isShowIndicator = self.searchProductListViewModel.hasMorePage
             return cell
         }
     }
@@ -166,7 +163,7 @@ extension SearchProductListView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        if indexPath.section == 1 && searchViewModel.isNeedLoadMorePage{
+        if indexPath.section == 1 && searchProductListViewModel.isNeedLoadMorePage{
             self.startSearch(isNeedLoadMorePage: true)
         }
     }
@@ -202,7 +199,7 @@ extension SearchProductListView: UICollectionViewDelegateFlowLayout {
 }
 
 //MARK: - SearchProductViewModelDelegate
-extension SearchProductListView: SearchProductViewModelDelegate {
+extension SearchProductListView: SearchProductListViewModelDelegate {
     func didReceiveProductResponseStatus(_ response: ResoponseStatus) {
         DispatchQueue.main.async {
             switch response {
@@ -214,6 +211,7 @@ extension SearchProductListView: SearchProductViewModelDelegate {
                 self.setupNoProductView(error: error)
                 break
             }
+            self.productCollectionView.reloadData()
         }
     }
 }

@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol SearchProductViewModelDelegate: AnyObject {
+protocol SearchProductListViewModelDelegate: AnyObject {
     func didReceiveProductResponseStatus(_ response: ResoponseStatus)
 }
 
-class SearchProductViewModel {
+class SearchProductListViewModel {
     
-    weak var delegate: SearchProductViewModelDelegate?
+    weak var delegate: SearchProductListViewModelDelegate?
     
     private let networkService: NetworkServiceProtcol
     private var products: Products? = nil
@@ -22,7 +22,7 @@ class SearchProductViewModel {
     public var hasMorePage: Bool = false
     public var productArray: [Product] = []
     
-    let debounce = Debounce(timeInterval: 0.5, queue: .global(qos: .userInitiated))
+    let searchDebounce = Debounce(timeInterval: 0.5, queue: .global(qos: .userInitiated))
     
     init(_ networkService: NetworkServiceProtcol) {
         self.networkService = networkService
@@ -40,26 +40,18 @@ class SearchProductViewModel {
         return searchText.isEmpty
     }
     
-    private func reset() -> Void {
-        self.hasMorePage = false
-        self.products = nil
-        self.productArray.removeAll()
-        
-    }
-    
     func startSearchRequest(URLReuquestBuilder: URLRequestBuilder,
                             searchText: String = "") -> Void {
         
         self.searchText = searchText
-        self.debounce.dispatch {
+        
+        self.searchDebounce.dispatch {
             if !self.searchText.isEmpty {
                 self.reset()
                 self.requestForSearchProduct(URLReuquestBuilder: URLReuquestBuilder)
             }
             else {
-                self.reset()
-                self.currentResponseStatus = .success
-                self.delegate?.didReceiveProductResponseStatus(self.currentResponseStatus)
+                self.forcelyResetWhenSearchTextEmpty()
             }
         }
     }
@@ -89,10 +81,13 @@ class SearchProductViewModel {
     }
     
     func loadMorePage(URLReuquestBuilder: URLRequestBuilder) -> Void {
-        debounce.dispatch {
+        searchDebounce.dispatch {
             self.currentResponseStatus = .loading
             if !self.searchText.isEmpty {
                 self.sendRequest(URLReuquestBuilder: URLReuquestBuilder)
+            }
+            else {
+                self.forcelyResetWhenSearchTextEmpty()
             }
         }
     }
@@ -114,6 +109,22 @@ class SearchProductViewModel {
         }
     }
     
+    private func reset() -> Void {
+        self.hasMorePage = false
+        self.products = nil
+        self.productArray.removeAll()
+    }
+    
+    private func forcelyResetWhenSearchTextEmpty() -> Void {
+        self.reset()
+        self.currentResponseStatus = .success
+        self.delegate?.didReceiveProductResponseStatus(self.currentResponseStatus)
+    }
+}
+
+//MARK: - MakeURLRequestBuilder
+extension SearchProductListViewModel {
+    
     public func makeURLRequestBuilder(_ parameters: [String: String],
                                       httpMethod: HTTPMethod,
                                       host: Host,
@@ -131,5 +142,4 @@ class SearchProductViewModel {
                                  headers: headers,
                                  queryParams: paraDictArray)
     }
-    
 }

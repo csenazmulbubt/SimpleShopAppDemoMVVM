@@ -28,8 +28,10 @@ class ProductCollectionViewCell: UICollectionViewCell {
         
     }
     
-    public func setupCell(product: Product) -> Void {
-        productTitleLabel.text = product.title
-        priceLabel.text = "$\(product.price)"
+    public func setupCell(product: Product?) -> Void {
+        if product != nil {
+            productTitleLabel.text = product!.title
+            priceLabel.text = "$\(product!.price)"
+        }
     }
 }
