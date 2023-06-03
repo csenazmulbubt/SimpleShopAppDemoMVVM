@@ -9,7 +9,7 @@ import Foundation
 
 struct Products: Decodable {
     let products: [Product]
-    //let total, skip, limit: Int
+    let total, skip, limit: Int
 }
 
 struct Product: Decodable {

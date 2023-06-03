@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProductCollectionViewCell" id="gTV-IL-0wX" customClass="ProductCollectionViewCell" customModule="SampleShopAppMVVM" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="159" height="163"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="159" height="163"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QKA-u8-g9i">
+                        <rect key="frame" x="0.0" y="0.0" width="159" height="163"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeHolderImage" translatesAutoresizingMaskIntoConstraints="NO" id="SeP-vx-6bo">
+                                <rect key="frame" x="0.0" y="0.0" width="159" height="98"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O4f-uu-tB0">
+                                <rect key="frame" x="0.0" y="98" width="159" height="65"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Black" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vu0-zr-QLE">
+                                        <rect key="frame" x="4" y="0.0" width="155" height="32.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$1000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qcc-dY-fEO">
+                                        <rect key="frame" x="4" y="32.5" width="32.5" height="32.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="10"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Qb-Lv-QId">
+                                        <rect key="frame" x="109" y="32.5" width="50" height="32.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="vC2-Ou-gkB"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Add">
+                                            <color key="titleColor" systemColor="systemOrangeColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cartAddButtonAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="OXd-jj-xAU"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Qcc-dY-fEO" firstAttribute="leading" secondItem="O4f-uu-tB0" secondAttribute="leading" constant="4" id="0oW-VY-UqQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="5Qb-Lv-QId" secondAttribute="bottom" id="3G6-V7-fwp"/>
+                                    <constraint firstItem="5Qb-Lv-QId" firstAttribute="top" secondItem="vu0-zr-QLE" secondAttribute="bottom" id="3j9-kL-ZUR"/>
+                                    <constraint firstItem="vu0-zr-QLE" firstAttribute="leading" secondItem="O4f-uu-tB0" secondAttribute="leading" constant="4" id="D94-kS-alg"/>
+                                    <constraint firstAttribute="bottom" secondItem="Qcc-dY-fEO" secondAttribute="bottom" id="GKH-xS-fya"/>
+                                    <constraint firstItem="vu0-zr-QLE" firstAttribute="height" secondItem="O4f-uu-tB0" secondAttribute="height" multiplier="0.5" id="GOp-iB-1fv"/>
+                                    <constraint firstItem="vu0-zr-QLE" firstAttribute="top" secondItem="O4f-uu-tB0" secondAttribute="top" id="O93-Hc-8bP"/>
+                                    <constraint firstAttribute="trailing" secondItem="5Qb-Lv-QId" secondAttribute="trailing" id="g4G-Gp-R19"/>
+                                    <constraint firstAttribute="trailing" secondItem="vu0-zr-QLE" secondAttribute="trailing" id="tPq-f0-W1s"/>
+                                    <constraint firstItem="Qcc-dY-fEO" firstAttribute="top" secondItem="vu0-zr-QLE" secondAttribute="bottom" id="zyS-4U-xtG"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemGray2Color"/>
+                        <constraints>
+                            <constraint firstItem="O4f-uu-tB0" firstAttribute="leading" secondItem="QKA-u8-g9i" secondAttribute="leading" id="0oA-OM-m1m"/>
+                            <constraint firstAttribute="bottom" secondItem="O4f-uu-tB0" secondAttribute="bottom" id="2aC-Lm-ouT"/>
+                            <constraint firstItem="SeP-vx-6bo" firstAttribute="top" secondItem="QKA-u8-g9i" secondAttribute="top" id="BaA-EA-zVh"/>
+                            <constraint firstItem="O4f-uu-tB0" firstAttribute="top" secondItem="SeP-vx-6bo" secondAttribute="bottom" id="bXq-Ny-rqu"/>
+                            <constraint firstItem="SeP-vx-6bo" firstAttribute="height" secondItem="QKA-u8-g9i" secondAttribute="height" multiplier="0.6" id="bkY-3B-zH1"/>
+                            <constraint firstItem="SeP-vx-6bo" firstAttribute="leading" secondItem="QKA-u8-g9i" secondAttribute="leading" id="dB5-pd-M7Y"/>
+                            <constraint firstAttribute="trailing" secondItem="O4f-uu-tB0" secondAttribute="trailing" id="r9X-LF-I3o"/>
+                            <constraint firstAttribute="trailing" secondItem="SeP-vx-6bo" secondAttribute="trailing" id="sw1-T8-QCd"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="QKA-u8-g9i" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="QdQ-uD-vFJ"/>
+                <constraint firstAttribute="trailing" secondItem="QKA-u8-g9i" secondAttribute="trailing" id="UWo-Hk-3ac"/>
+                <constraint firstItem="QKA-u8-g9i" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Wo9-WA-MWw"/>
+                <constraint firstAttribute="bottom" secondItem="QKA-u8-g9i" secondAttribute="bottom" id="b6s-8t-2Dp"/>
+            </constraints>
+            <size key="customSize" width="159" height="163"/>
+            <connections>
+                <outlet property="cartAddButton" destination="5Qb-Lv-QId" id="qXg-iZ-xck"/>
+                <outlet property="priceLabel" destination="Qcc-dY-fEO" id="wlg-aN-hpO"/>
+                <outlet property="productImageView" destination="SeP-vx-6bo" id="E5f-26-F9c"/>
+                <outlet property="productTitleLabel" destination="vu0-zr-QLE" id="Rmg-x6-WPe"/>
+            </connections>
+            <point key="canvasLocation" x="216.66666666666669" y="101.45089285714285"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="placeHolderImage" width="173" height="130"/>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

@@ -33,7 +33,3 @@ enum APIError: Error {
     }
 }
 
-public enum ResoponseStatus {
-    case success
-    case failure(_ errorMessage: String)
-}

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="IndicatorCollectionViewCell" id="gTV-IL-0wX" customClass="IndicatorCollectionViewCell" customModule="SampleShopAppMVVM" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="141" height="87"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="141" height="87"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Awp-VH-sQh">
+                        <rect key="frame" x="0.0" y="0.0" width="141" height="87"/>
+                        <subviews>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No More Product Found" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DNo-hn-555">
+                                <rect key="frame" x="0.0" y="0.0" width="141" height="87"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="3MQ-PJ-m4G">
+                                <rect key="frame" x="60.5" y="33.5" width="20" height="20"/>
+                                <color key="color" systemColor="systemRedColor"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="3MQ-PJ-m4G" firstAttribute="centerY" secondItem="Awp-VH-sQh" secondAttribute="centerY" id="3iI-9y-LOx"/>
+                            <constraint firstItem="DNo-hn-555" firstAttribute="top" secondItem="Awp-VH-sQh" secondAttribute="top" id="56J-gW-lCg"/>
+                            <constraint firstAttribute="bottom" secondItem="DNo-hn-555" secondAttribute="bottom" id="LGf-Xv-z8U"/>
+                            <constraint firstItem="3MQ-PJ-m4G" firstAttribute="centerX" secondItem="Awp-VH-sQh" secondAttribute="centerX" id="SJi-Ea-YqO"/>
+                            <constraint firstAttribute="trailing" secondItem="DNo-hn-555" secondAttribute="trailing" id="aLq-Zd-0q5"/>
+                            <constraint firstItem="DNo-hn-555" firstAttribute="leading" secondItem="Awp-VH-sQh" secondAttribute="leading" id="kyk-Cq-jsG"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Awp-VH-sQh" secondAttribute="trailing" id="ji0-Df-hVl"/>
+                <constraint firstAttribute="bottom" secondItem="Awp-VH-sQh" secondAttribute="bottom" id="nL2-DX-pIL"/>
+                <constraint firstItem="Awp-VH-sQh" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="pNI-xp-iPI"/>
+                <constraint firstItem="Awp-VH-sQh" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="sWk-xO-lzH"/>
+            </constraints>
+            <size key="customSize" width="141" height="87"/>
+            <connections>
+                <outlet property="activityIndicator" destination="3MQ-PJ-m4G" id="cP7-P7-Oo0"/>
+                <outlet property="noMoreProductLabel" destination="DNo-hn-555" id="iZJ-m0-COf"/>
+            </connections>
+            <point key="canvasLocation" x="203.62318840579712" y="76.004464285714278"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

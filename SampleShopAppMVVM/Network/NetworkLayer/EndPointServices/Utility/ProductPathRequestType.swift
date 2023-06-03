@@ -30,7 +30,7 @@ public enum ProductPathRequestType {
             return productBasePath + "/categories"
         case .getproductCategory(let categoryName):
             return productBasePath + "/categories" + "/\(categoryName)"
-        case .         searchProduct:
+        case .searchProduct:
             return productBasePath + "/search"
         case .addProduct:
             return productBasePath + "/add"
