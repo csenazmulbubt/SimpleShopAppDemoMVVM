@@ -44,7 +44,6 @@ class SearchProductListViewModel {
                             searchText: String = "") -> Void {
         
         self.searchText = searchText
-        
         self.searchDebounce.dispatch {
             if !self.searchText.isEmpty {
                 self.reset()

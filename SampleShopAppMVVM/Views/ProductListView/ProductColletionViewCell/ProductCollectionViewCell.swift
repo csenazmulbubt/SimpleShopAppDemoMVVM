@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol ProductCollectionViewCellDelegate: AnyObject {
+    func tappedOnAddCartButton(tag: Int)
+}
+
 class ProductCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var productImageView: UIImageView!
@@ -14,6 +18,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var cartAddButton: UIButton!
    
+    weak var delegate: ProductCollectionViewCellDelegate? = nil
     static let cellReuseIdentifier = "ProductCollectionViewCell"
     
     override func awakeFromNib() {
@@ -25,7 +30,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     }
     
     @IBAction func cartAddButtonAction(_ sender: UIButton) {
-        
+        delegate?.tappedOnAddCartButton(tag: sender.tag)
     }
     
     public func setupCell(product: Product?) -> Void {

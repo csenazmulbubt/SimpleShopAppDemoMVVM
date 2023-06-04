@@ -23,4 +23,16 @@ class JSONEncodingDecoding {
             completion(.failure(APIError.jsonConversionFailure))
         }
     }
+    
+    class func EncodingData<T: Encodable>(of type: T) -> Data? {
+        var jsonData: Data? = nil
+        do {
+            let JSONEncoder = JSONEncoder()
+            JSONEncoder.outputFormatting = .prettyPrinted
+            jsonData = try JSONEncoder.encode(type)
+        }
+        catch {
+        }
+        return jsonData
+    }
 }

@@ -1,5 +1,5 @@
 //
-//  EndPath.swift
+//  ProductPathRequestType.swift
 //  SampleShopAppMVVM
 //
 //  Created by Nazmul on 01/06/2023.

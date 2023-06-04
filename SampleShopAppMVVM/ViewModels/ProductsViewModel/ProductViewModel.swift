@@ -12,17 +12,22 @@ protocol ProductViewModelDelegate: NSObjectProtocol {
 }
 
 class ProductViewModel {
-   
+    
     weak var delegate: ProductViewModelDelegate?
-   
+    
     private let networkService: NetworkServiceProtcol
     private var products: Products? = nil
     public var hasMorePage: Bool = true
     public var productArray: [Product] = []
     private var currentResponseStatus: ResoponseStatus = .success
+    private var productCartListViewModel: ProductCartListViewModel? = nil
     
-    init(_ networkService: NetworkServiceProtcol) {
+    init(_ networkService: NetworkServiceProtcol,
+         cartService: CartProtocol? = nil) {
         self.networkService = networkService
+        if let cartService = cartService {
+            self.productCartListViewModel = ProductCartListViewModel(cartService, networkServiceProtocol: networkService)
+        }
     }
     
     public var isNeedLoadMorePage: Bool {
@@ -84,6 +89,29 @@ class ProductViewModel {
                                  endPath: endPath,
                                  headers: headers,
                                  queryParams: paraDictArray)
+    }
+    
+    func addToCart(_ productId: Int) -> Void {
+        if let _ = self.productArray.firstIndex(where: { $0.id == productId}){
+            self.applyCartOperation(isRemove: false, product: ProductCart(id: productId, quantity: 1))
+        }
+    }
+    
+    func removeToCart(_ productId: Int) -> Void {
+        if let _ = self.productArray.firstIndex(where: { $0.id == productId}){
+            self.applyCartOperation(isRemove: true, product: ProductCart(id: productId, quantity: 1))
+        }
+    }
+    
+    private func applyCartOperation(isRemove: Bool, product: ProductCart) -> Void {
+        guard let productCartListViewModel = self.productCartListViewModel else { return  }
+        
+        if isRemove {
+            productCartListViewModel.removeFromCart(product)
+        }
+        else {
+            productCartListViewModel.addToCart(product)
+        }
     }
     
 }

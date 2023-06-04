@@ -14,4 +14,10 @@ protocol NetworkServiceProtcol: AnyObject {
     func sendGetRequest<T: Decodable>(URLReuquestBuilder: URLRequestBuilder,
                                       decodingType: T.Type,
                                       completion: @escaping ResultBlock<T>) -> Void
+    
+    func sendPostRequest<T: Decodable,
+                         E: Encodable>(URLReuquestBuilder: URLRequestBuilder,
+                                       encodingData: E,
+                                       decodingType: T.Type,
+                                       completion: @escaping ResultBlock<T>) -> Void
 }

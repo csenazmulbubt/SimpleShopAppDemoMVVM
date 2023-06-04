@@ -10,19 +10,22 @@ import Combine
 
 class ProductListVC: UIViewController {
     
+    @IBOutlet weak var productListView: ProductListView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.productListView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
-    
-    
-    @IBAction func tappedOnBackButton(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
 }
 
+//MARK: - ProductListViewDelegate
+extension ProductListVC: ProductListViewDelegate {
+    func tappedOnBackButton() {
+        self.navigationController?.popViewController(animated: true)
+    }
+}

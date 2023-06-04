@@ -93,31 +93,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="udz-DT-AEB">
-                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fbt-tG-bMM">
-                                        <rect key="frame" x="8" y="0.0" width="44" height="44"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="Fbt-tG-bMM" secondAttribute="height" multiplier="1:1" id="vgR-22-puE"/>
-                                        </constraints>
-                                        <inset key="imageEdgeInsets" minX="8" minY="12" maxX="8" maxY="12"/>
-                                        <state key="normal" image="back-white"/>
-                                        <connections>
-                                            <action selector="tappedOnBackButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bb7-vJ-8au"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="Fbt-tG-bMM" secondAttribute="bottom" id="2JT-gg-98M"/>
-                                    <constraint firstItem="Fbt-tG-bMM" firstAttribute="top" secondItem="udz-DT-AEB" secondAttribute="top" id="kxf-eD-EZF"/>
-                                    <constraint firstItem="Fbt-tG-bMM" firstAttribute="leading" secondItem="udz-DT-AEB" secondAttribute="leading" constant="8" id="pb6-A6-6qz"/>
-                                    <constraint firstAttribute="height" constant="44" id="vKf-ho-mvI"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bl3-qE-Q35" customClass="ProductListView" customModule="SampleShopAppMVVM" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                             </view>
                         </subviews>
@@ -125,14 +102,14 @@
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bl3-qE-Q35" secondAttribute="bottom" id="Uy4-9P-psR"/>
-                            <constraint firstItem="bl3-qE-Q35" firstAttribute="top" secondItem="udz-DT-AEB" secondAttribute="bottom" id="fbn-2Y-GFr"/>
-                            <constraint firstItem="udz-DT-AEB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="goM-3b-e0p"/>
-                            <constraint firstItem="udz-DT-AEB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="hhZ-uc-P9L"/>
+                            <constraint firstItem="bl3-qE-Q35" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="gn8-gc-bUG"/>
                             <constraint firstItem="bl3-qE-Q35" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="tyO-Pa-vLc"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bl3-qE-Q35" secondAttribute="trailing" id="wCR-Av-6OC"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="udz-DT-AEB" secondAttribute="trailing" id="xwt-6j-0uv"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="productListView" destination="bl3-qE-Q35" id="g3r-E9-JIn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -188,7 +165,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="back-white" width="67" height="45"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

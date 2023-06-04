@@ -20,7 +20,6 @@ class SearchProductListVC: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
-    
 }
 
 //MARK: - SearchProductListViewDelegate

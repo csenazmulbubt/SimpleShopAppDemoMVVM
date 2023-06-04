@@ -70,7 +70,6 @@ class SearchProductListView: UIView {
     
     @IBAction func tappedOnBackButton(_ sender: UIButton) {
         delegate?.tappedOnBackButton()
-        
     }
     
     private func startSearch(isNeedLoadMorePage: Bool = false) -> Void {

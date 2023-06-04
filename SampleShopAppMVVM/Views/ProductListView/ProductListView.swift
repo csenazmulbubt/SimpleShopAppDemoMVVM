@@ -7,14 +7,20 @@
 
 import UIKit
 
+protocol ProductListViewDelegate: AnyObject {
+    func tappedOnBackButton()
+}
+
 class ProductListView: UIView {
 
     @IBOutlet weak var productCollectionView: UICollectionView!
+    @IBOutlet weak var totalCartItemShowLabel: UILabel!
     
+    weak var delegate: ProductListViewDelegate? = nil
     static let nibName = "ProductListView"
     private let section = 2
     
-    let productViewModel = ProductViewModel(NetworkService())
+    let productViewModel = ProductViewModel(NetworkService(), cartService: ProductCartOperation())
     let debounce = Debounce(timeInterval: 1.0, queue: .global(qos: .userInitiated))
     
     override init(frame: CGRect) {
@@ -56,6 +62,14 @@ class ProductListView: UIView {
             self.productViewModel.startProductRequest(URLReuquestBuilder: URLRequestBuilder)
         }
     }
+    
+    @IBAction func tappedOnCartButton(_ sender: UIButton) {
+        
+    }
+    
+    @IBAction func tappedOnBackButton(_ sender: UIButton) {
+        self.delegate?.tappedOnBackButton()
+    }
 }
 
 //MARK: - UICollectionViewDataSource
@@ -79,6 +93,8 @@ extension ProductListView: UICollectionViewDataSource {
         if indexPath.section == 0 {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCollectionViewCell.cellReuseIdentifier, for: indexPath) as? ProductCollectionViewCell
             else { return  UICollectionViewCell() }
+            cell.cartAddButton.tag = indexPath.item
+            cell.delegate = self
             cell.setupCell(product: productViewModel.productArray[indexPath.item])
             return cell
         }
@@ -128,6 +144,13 @@ extension ProductListView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
         return UIEdgeInsets(top: 0, left: 10, bottom: 5, right: 10)
+    }
+}
+
+//MARK: - ProductCollectionViewCellDelegate
+extension ProductListView: ProductCollectionViewCellDelegate {
+    func tappedOnAddCartButton(tag: Int) {
+        self.productViewModel.addToCart(productViewModel.productArray[tag].id)
     }
 }
 

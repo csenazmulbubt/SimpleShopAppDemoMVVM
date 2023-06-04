@@ -15,7 +15,35 @@ class NetworkService: NSObject,NetworkServiceProtcol {
                                       decodingType: T.Type,
                                       completion: @escaping ResultBlock<T>) -> Void {
         
-        guard let urlRequest = URLReuquestBuilder.urlRequest else { return completion(.failure(.customErrorMessage(message: "URLRequest Not Found"))) }
+        guard let urlRequest = URLReuquestBuilder.urlRequest else {  completion(.failure(.customErrorMessage(message: "URLRequest Not Found")))
+            return
+        }
+        
+        sendRequestToServer(urlRequest: urlRequest, decodingType: decodingType, completion: completion)
+    }
+    
+    func sendPostRequest<T: Decodable,
+                         E: Encodable>(URLReuquestBuilder: URLRequestBuilder,
+                                       encodingData: E,
+                                       decodingType: T.Type,
+                                       completion: @escaping ResultBlock<T>) -> Void {
+        
+        guard let data = JSONEncodingDecoding.EncodingData(of: encodingData) else{
+            completion(.failure(.customErrorMessage(message: "JSONEncoding Fail")))
+            return
+        }
+        
+        guard let urlRequest = URLReuquestBuilder.urlRequest else {  completion(.failure(.customErrorMessage(message: "URLRequest Not Found")))
+            return
+        }
+        var URLRequest = urlRequest
+        URLRequest.httpBody = data
+        sendRequestToServer(urlRequest: URLRequest, decodingType: decodingType, completion: completion)
+    }
+    
+    private func sendRequestToServer<T: Decodable>(urlRequest: URLRequest,
+                                                  decodingType: T.Type,
+                                                  completion: @escaping ResultBlock<T>) -> Void {
         
         let task = URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             
@@ -33,6 +61,7 @@ class NetworkService: NSObject,NetworkServiceProtcol {
                 completion(.failure(.invalidData))
                 return
             }
+            
             JSONEncodingDecoding.DecodingData(of: decodingType, from: actualData, completion: completion)
         }
         task.resume()
