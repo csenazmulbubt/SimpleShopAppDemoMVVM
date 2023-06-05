@@ -26,6 +26,8 @@ class ProductCollectionViewCell: UICollectionViewCell {
         // Initialization code
         DispatchQueue.main.async {
             self.layer.cornerRadius = 8
+            self.productTitleLabel.layer.cornerRadius = 8
+            self.cartAddButton.layer.cornerRadius = 8
         }
     }
     
