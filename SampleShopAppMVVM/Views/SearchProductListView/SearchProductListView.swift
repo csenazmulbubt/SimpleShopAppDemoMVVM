@@ -73,9 +73,11 @@ class SearchProductListView: UIView {
     }
     
     private func startSearch(isNeedLoadMorePage: Bool = false) -> Void {
-        var paraDict: [String: String] = ["limit": "10"]
+        var paraDict: [String: String] = ["limit": "10" ]
         paraDict["q"] = self.searchText
-        let URLRequestBuilder = searchProductListViewModel.makeURLRequestBuilder(paraDict,
+        paraDict ["skip"] = "\(searchProductListViewModel.productArray.count)"
+        
+        let URLRequestBuilder = URLRequestBuilder.makeURLRequestBuilder(paraDict,
                                                                         httpMethod: .get,
                                                                         host: .dummyHost,
                                                                         scheme: .https,

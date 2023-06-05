@@ -9,9 +9,10 @@ import Foundation
 
 protocol ProductViewModelDelegate: NSObjectProtocol {
     func didReceiveProductResponseStatus(_ Response: ResoponseStatus)
+    func didReceiveCartOperationStatus(responseStatus: ResoponseStatus)
 }
 
-class ProductViewModel {
+class ProductListViewModel {
     
     weak var delegate: ProductViewModelDelegate?
     
@@ -27,6 +28,7 @@ class ProductViewModel {
         self.networkService = networkService
         if let cartService = cartService {
             self.productCartListViewModel = ProductCartListViewModel(cartService, networkServiceProtocol: networkService)
+            self.productCartListViewModel?.delegate = self
         }
     }
     
@@ -72,25 +74,6 @@ class ProductViewModel {
         }
     }
     
-    
-    public func makeURLRequestBuilder(_ parameters: [String: String],
-                                      httpMethod: HTTPMethod,
-                                      host: Host,
-                                      scheme: Scheme,
-                                      endPath: String,
-                                      headers: [String: String]? = nil) -> URLRequestBuilder {
-        
-        var paraDictArray = parameters
-        paraDictArray["skip"] = "\(productArray.count)"
-        
-        return URLRequestBuilder(httpMethod: httpMethod,
-                                 host: host,
-                                 scheme: scheme,
-                                 endPath: endPath,
-                                 headers: headers,
-                                 queryParams: paraDictArray)
-    }
-    
     func addToCart(_ productId: Int) -> Void {
         if let _ = self.productArray.firstIndex(where: { $0.id == productId}){
             self.applyCartOperation(isRemove: false, product: ProductCart(id: productId, quantity: 1))
@@ -103,7 +86,8 @@ class ProductViewModel {
         }
     }
     
-    private func applyCartOperation(isRemove: Bool, product: ProductCart) -> Void {
+    private func applyCartOperation(isRemove: Bool,
+                                    product: ProductCart) -> Void {
         guard let productCartListViewModel = self.productCartListViewModel else { return  }
         
         if isRemove {
@@ -114,4 +98,15 @@ class ProductViewModel {
         }
     }
     
+    func getTotalCartItem() -> Int {
+        return self.productCartListViewModel?.productCarts?.totalQuantity ?? 0
+    }
+}
+
+//MARK: - ProductCartListViewModelProtocol
+extension ProductListViewModel: ProductCartListViewModelProtocol {
+    
+    func didReceiveCartOperationStatus(_ responseStatus: ResoponseStatus) {
+        delegate?.didReceiveCartOperationStatus(responseStatus: responseStatus)
+    }
 }

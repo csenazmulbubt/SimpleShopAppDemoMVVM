@@ -20,7 +20,7 @@ class ProductListView: UIView {
     static let nibName = "ProductListView"
     private let section = 2
     
-    let productViewModel = ProductViewModel(NetworkService(), cartService: ProductCartOperation())
+    let productListViewModel = ProductListViewModel(NetworkService(), cartService: ProductCartOperation())
     let debounce = Debounce(timeInterval: 1.0, queue: .global(qos: .userInitiated))
     
     override init(frame: CGRect) {
@@ -47,19 +47,21 @@ class ProductListView: UIView {
         self.productCollectionView.register(UINib(nibName: IndicatorCollectionViewCell.cellReuseIdentifier, bundle: nil), forCellWithReuseIdentifier: IndicatorCollectionViewCell.cellReuseIdentifier)
         self.productCollectionView.delegate = self
         self.productCollectionView.dataSource = self
-        self.productViewModel.delegate = self
+        self.productListViewModel.delegate = self
         self.startProductFetchRequest()
     }
     
     private func startProductFetchRequest() -> Void {
-        let URLRequestBuilder = productViewModel.makeURLRequestBuilder(["limit": "10"],
+        var paraDict: [String: String] = ["limit": "10" ]
+        paraDict ["skip"] = "\(productListViewModel.productArray.count)"
+        let URLRequestBuilder = URLRequestBuilder.makeURLRequestBuilder(paraDict,
                                                                         httpMethod: .get,
                                                                         host: .dummyHost,
                                                                         scheme: .https,
                                                                         endPath: ProductPathRequestType.getProducts.path,
                                                                         headers: nil)
         self.debounce.dispatch {
-            self.productViewModel.startProductRequest(URLReuquestBuilder: URLRequestBuilder)
+            self.productListViewModel.startProductRequest(URLReuquestBuilder: URLRequestBuilder)
         }
     }
     
@@ -69,6 +71,10 @@ class ProductListView: UIView {
     
     @IBAction func tappedOnBackButton(_ sender: UIButton) {
         self.delegate?.tappedOnBackButton()
+    }
+    
+    private func updateCartLable() -> Void {
+        self.totalCartItemShowLabel.text = "\(productListViewModel.getTotalCartItem())"
     }
 }
 
@@ -83,7 +89,7 @@ extension ProductListView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if section == 0 {
-            return productViewModel.productArray.count
+            return productListViewModel.productArray.count
         }
         return 1
     }
@@ -95,13 +101,13 @@ extension ProductListView: UICollectionViewDataSource {
             else { return  UICollectionViewCell() }
             cell.cartAddButton.tag = indexPath.item
             cell.delegate = self
-            cell.setupCell(product: productViewModel.productArray[indexPath.item])
+            cell.setupCell(product: productListViewModel.productArray[indexPath.item])
             return cell
         }
         else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IndicatorCollectionViewCell.cellReuseIdentifier, for: indexPath) as? IndicatorCollectionViewCell
             else { return  UICollectionViewCell() }
-            cell.isShowIndicator = self.productViewModel.hasMorePage
+            cell.isShowIndicator = self.productListViewModel.hasMorePage
             return cell
         }
     }
@@ -112,7 +118,7 @@ extension ProductListView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        if indexPath.section == 1 && productViewModel.isNeedLoadMorePage{
+        if indexPath.section == 1 && productListViewModel.isNeedLoadMorePage{
             self.startProductFetchRequest()
         }
     }
@@ -150,13 +156,12 @@ extension ProductListView: UICollectionViewDelegateFlowLayout {
 //MARK: - ProductCollectionViewCellDelegate
 extension ProductListView: ProductCollectionViewCellDelegate {
     func tappedOnAddCartButton(tag: Int) {
-        self.productViewModel.addToCart(productViewModel.productArray[tag].id)
+        self.productListViewModel.addToCart(productListViewModel.productArray[tag].id)
     }
 }
 
 //MARK: - ProductViewModelDelegate
 extension ProductListView: ProductViewModelDelegate {
-    
     func didReceiveProductResponseStatus(_ Response: ResoponseStatus) {
         DispatchQueue.main.async {
             switch Response {
@@ -166,6 +171,21 @@ extension ProductListView: ProductViewModelDelegate {
                 self.productCollectionView.reloadData()
             case .failure(let error):
                 print("Error",error)
+            }
+        }
+    }
+    
+    func didReceiveCartOperationStatus(responseStatus: ResoponseStatus) {
+        DispatchQueue.main.async {
+            switch responseStatus {
+            case .loading:
+                break
+            case .success:
+                self.updateCartLable()
+                 break
+            case .failure(let error):
+                debugPrint("Something went Worng",error)
+                break
             }
         }
     }

@@ -120,25 +120,3 @@ class SearchProductListViewModel {
         self.delegate?.didReceiveProductResponseStatus(self.currentResponseStatus)
     }
 }
-
-//MARK: - MakeURLRequestBuilder
-extension SearchProductListViewModel {
-    
-    public func makeURLRequestBuilder(_ parameters: [String: String],
-                                      httpMethod: HTTPMethod,
-                                      host: Host,
-                                      scheme: Scheme,
-                                      endPath: String,
-                                      headers: [String: String]? = nil) -> URLRequestBuilder {
-        
-        var paraDictArray = parameters
-        paraDictArray["skip"] = "\(productArray.count)"
-        
-        return URLRequestBuilder(httpMethod: httpMethod,
-                                 host: host,
-                                 scheme: scheme,
-                                 endPath: endPath,
-                                 headers: headers,
-                                 queryParams: paraDictArray)
-    }
-}

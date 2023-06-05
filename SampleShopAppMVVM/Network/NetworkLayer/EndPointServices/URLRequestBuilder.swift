@@ -47,4 +47,19 @@ struct URLRequestBuilder {
         return urlRequest
     }
     
+    static func makeURLRequestBuilder(_ parameters: [String: String]?,
+                                      httpMethod: HTTPMethod,
+                                      host: Host,
+                                      scheme: Scheme,
+                                      endPath: String,
+                                      headers: [String: String]? = nil) -> URLRequestBuilder {
+        
+        return URLRequestBuilder(httpMethod: httpMethod,
+                                 host: host,
+                                 scheme: scheme,
+                                 endPath: endPath,
+                                 headers: headers,
+                                 queryParams: parameters)
+    }
+    
 }
