@@ -12,14 +12,14 @@ protocol ProductCollectionViewCellDelegate: AnyObject {
 }
 
 class ProductCollectionViewCell: UICollectionViewCell {
-
+    
     @IBOutlet weak var productImageView: UIImageView!
     @IBOutlet weak var productTitleLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var cartAddButton: UIButton!
     @IBOutlet weak var percentageOffCV: UIView!
     @IBOutlet weak var percentageLabel: UILabel!
-   
+    
     weak var delegate: ProductCollectionViewCellDelegate? = nil
     static let cellReuseIdentifier = "ProductCollectionViewCell"
     

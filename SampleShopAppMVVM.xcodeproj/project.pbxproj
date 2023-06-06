@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0039EEEE2A2FC4E00055E9F0 /* ProductCartListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0039EEED2A2FC4E00055E9F0 /* ProductCartListVC.swift */; };
 		003AC1CB2A29BC25002A5A32 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003AC1CA2A29BC25002A5A32 /* APIError.swift */; };
 		003AC1CD2A29BD22002A5A32 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003AC1CC2A29BD22002A5A32 /* NetworkService.swift */; };
 		003AC1D02A29BD72002A5A32 /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003AC1CF2A29BD72002A5A32 /* NetworkServiceProtocol.swift */; };
@@ -76,6 +77,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0039EEED2A2FC4E00055E9F0 /* ProductCartListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCartListVC.swift; sourceTree = "<group>"; };
 		003AC1CA2A29BC25002A5A32 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		003AC1CC2A29BD22002A5A32 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		003AC1CF2A29BD72002A5A32 /* NetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceProtocol.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 		0039EEEC2A2FB1DC0055E9F0 /* ProductCartListVC */ = {
 			isa = PBXGroup;
 			children = (
+				0039EEED2A2FC4E00055E9F0 /* ProductCartListVC.swift */,
 			);
 			path = ProductCartListVC;
 			sourceTree = "<group>";
@@ -822,6 +825,7 @@
 				003AC1D62A29C403002A5A32 /* ProductListViewModel.swift in Sources */,
 				008E773D2A2CF96C00EB5ED6 /* ProductCartPathRequestType.swift in Sources */,
 				00C975E52A285B9900EBA38D /* ProductListView.swift in Sources */,
+				0039EEEE2A2FC4E00055E9F0 /* ProductCartListVC.swift in Sources */,
 				008E77372A2C99B800EB5ED6 /* ProductCartOperation.swift in Sources */,
 				0089F0492A2A4F9300E1F146 /* ProductCollectionViewCell.swift in Sources */,
 				008E772F2A2C950500EB5ED6 /* ProductCarts.swift in Sources */,

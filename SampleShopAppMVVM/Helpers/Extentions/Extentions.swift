@@ -38,12 +38,16 @@ extension Array {
         guard indices.contains(index) else {
             return nil
         }
-
+        
         return self[index]
     }
 }
 
-
+extension UIViewController {
+    func showHideNavigationBarHidden(_ isHidden: Bool = true) -> Void {
+        self.navigationController?.setNavigationBarHidden(isHidden, animated: true)
+    }
+}
 
 
 extension UIImageView {

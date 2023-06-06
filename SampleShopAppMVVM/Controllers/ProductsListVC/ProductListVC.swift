@@ -20,11 +20,12 @@ class ProductListVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.showHideNavigationBarHidden()
     }
     
-    deinit {
-        print("Deinit Call")
+    func gotoCartListVC() -> Void {
+        let vc = AppStoryboard.Main.viewController(vc: ProductCartListVC.self)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -32,5 +33,9 @@ class ProductListVC: UIViewController {
 extension ProductListVC: ProductListViewDelegate {
     func tappedOnBackButton() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    func tappedOnCartButton() {
+        self.gotoCartListVC()
     }
 }

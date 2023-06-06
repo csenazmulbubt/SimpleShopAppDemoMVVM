@@ -129,7 +129,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4tE-nZ-dyw"/>
-                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="8Uh-8u-Izh" firstAttribute="top" secondItem="4tE-nZ-dyw" secondAttribute="top" id="dwz-EX-lDT"/>
                             <constraint firstItem="8Uh-8u-Izh" firstAttribute="leading" secondItem="4tE-nZ-dyw" secondAttribute="leading" id="hZC-OE-F0J"/>
@@ -144,6 +144,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e5b-VT-Vsp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2734" y="86"/>
+        </scene>
+        <!--Product Cart ListVC-->
+        <scene sceneID="aGP-F5-IfI">
+            <objects>
+                <viewController storyboardIdentifier="ProductCartListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="2s1-22-THg" customClass="ProductCartListVC" customModule="SampleShopAppMVVM" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9W3-fH-vvz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V0A-Bj-83W" customClass="ProductCartListView" customModule="SampleShopAppMVVM" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Xh3-fv-TBO"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Xh3-fv-TBO" firstAttribute="bottom" secondItem="V0A-Bj-83W" secondAttribute="bottom" id="UED-Ez-bkr"/>
+                            <constraint firstItem="Xh3-fv-TBO" firstAttribute="trailing" secondItem="V0A-Bj-83W" secondAttribute="trailing" id="l9L-4i-CD2"/>
+                            <constraint firstItem="V0A-Bj-83W" firstAttribute="top" secondItem="Xh3-fv-TBO" secondAttribute="top" id="lxF-R6-9e8"/>
+                            <constraint firstItem="V0A-Bj-83W" firstAttribute="leading" secondItem="Xh3-fv-TBO" secondAttribute="leading" id="suU-Vp-uW3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="productCartListView" destination="V0A-Bj-83W" id="W57-Og-sDL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h2y-4B-TM3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3530" y="86"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ywd-nW-q3i">
@@ -167,9 +197,6 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

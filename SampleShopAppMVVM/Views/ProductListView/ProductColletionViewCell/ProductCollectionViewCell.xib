@@ -70,10 +70,10 @@
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kqd-QT-xdY">
-                                <rect key="frame" x="83.5" y="0.0" width="67.5" height="30"/>
+                                <rect key="frame" x="106" y="0.0" width="45" height="30"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12% off" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEz-T8-3tQ">
-                                        <rect key="frame" x="0.0" y="4" width="67.5" height="26"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12% off" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEz-T8-3tQ">
+                                        <rect key="frame" x="0.0" y="4" width="45" height="26"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -83,7 +83,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="NEz-T8-3tQ" firstAttribute="top" secondItem="Kqd-QT-xdY" secondAttribute="top" constant="4" id="4BF-hg-FEM"/>
-                                    <constraint firstAttribute="width" secondItem="Kqd-QT-xdY" secondAttribute="height" multiplier="18:8" id="MXS-8f-ij5"/>
+                                    <constraint firstAttribute="width" secondItem="Kqd-QT-xdY" secondAttribute="height" multiplier="12:8" id="MXS-8f-ij5"/>
                                     <constraint firstAttribute="trailing" secondItem="NEz-T8-3tQ" secondAttribute="trailing" id="NRu-qF-3Ym"/>
                                     <constraint firstAttribute="bottom" secondItem="NEz-T8-3tQ" secondAttribute="bottom" id="Tls-jD-3nw"/>
                                     <constraint firstItem="NEz-T8-3tQ" firstAttribute="leading" secondItem="Kqd-QT-xdY" secondAttribute="leading" id="gaa-Cn-l1l"/>

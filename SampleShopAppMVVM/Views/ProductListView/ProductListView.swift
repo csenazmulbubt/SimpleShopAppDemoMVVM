@@ -9,6 +9,7 @@ import UIKit
 
 protocol ProductListViewDelegate: AnyObject {
     func tappedOnBackButton()
+    func tappedOnCartButton()
 }
 
 class ProductListView: UIView {
@@ -67,7 +68,7 @@ class ProductListView: UIView {
     }
     
     @IBAction func tappedOnCartButton(_ sender: UIButton) {
-        
+        self.delegate?.tappedOnCartButton()
     }
     
     @IBAction func tappedOnBackButton(_ sender: UIButton) {

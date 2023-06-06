@@ -105,7 +105,7 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" systemColor="systemGray6Color"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="kFf-bK-Rox" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="3Ty-Rl-LGk"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="kFf-bK-Rox" secondAttribute="trailing" id="4Fs-gt-o2K"/>
@@ -124,9 +124,6 @@
     </objects>
     <resources>
         <image name="back-white" width="67" height="45"/>
-        <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
