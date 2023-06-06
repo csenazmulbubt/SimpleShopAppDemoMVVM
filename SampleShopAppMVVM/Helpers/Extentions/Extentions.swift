@@ -53,6 +53,7 @@ extension UIImageView {
         }
         let resource = ImageResource(downloadURL: url, cacheKey: urlString)
         kf.indicatorType = .activity
-        kf.setImage(with: resource)
+        let processor = DownsamplingImageProcessor(size: CGSize(width: 300, height: 300))
+        kf.setImage(with: resource, placeholder: nil, options: [.processor(processor)], completionHandler: nil)
     }
 }

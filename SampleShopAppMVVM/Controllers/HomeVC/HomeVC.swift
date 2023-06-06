@@ -12,13 +12,13 @@ class HomeVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        //KingfisherManager.shared.cache.memoryStorage.config.totalCostLimit = 30_000
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        KingfisherManager.shared.cache.clearMemoryCache()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.clearCache()
     }
     
     @IBAction func tappedOnMenuButton(_ sender: UIButton) {
@@ -30,6 +30,12 @@ class HomeVC: UIViewController {
         default:
             break
         }
+    }
+    
+    private func clearCache() -> Void {
+        KingfisherManager.shared.cache.clearMemoryCache()
+        KingfisherManager.shared.cache.clearCache(completion: nil)
+        KingfisherManager.shared.cache.clearDiskCache(completion: nil)
     }
     
     func pushProductListVC() -> Void {

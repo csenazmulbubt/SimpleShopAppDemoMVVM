@@ -44,7 +44,8 @@ class SearchProductListViewModel {
                             searchText: String = "") -> Void {
         
         self.searchText = searchText
-        self.searchDebounce.dispatch {
+        self.searchDebounce.dispatch { [weak self] in
+            guard let self = self else {return}
             if !self.searchText.isEmpty {
                 self.reset()
                 self.requestForSearchProduct(URLReuquestBuilder: URLReuquestBuilder)
