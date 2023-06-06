@@ -22,6 +22,12 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oz5-jj-1dr" userLabel="navView">
                     <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                     <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Product List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qg2-Ef-s1y">
+                            <rect key="frame" x="153" y="10" width="108.5" height="24"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O0J-cK-yh1">
                             <rect key="frame" x="8" y="0.0" width="44" height="44"/>
                             <constraints>
@@ -57,11 +63,13 @@
                         <constraint firstAttribute="bottom" secondItem="ddC-kQ-sOC" secondAttribute="bottom" id="DMJ-1K-dCU"/>
                         <constraint firstItem="O0J-cK-yh1" firstAttribute="top" secondItem="Oz5-jj-1dr" secondAttribute="top" id="L3h-NL-svW"/>
                         <constraint firstAttribute="height" constant="44" id="Rpg-Nq-FQw"/>
+                        <constraint firstItem="Qg2-Ef-s1y" firstAttribute="centerY" secondItem="Oz5-jj-1dr" secondAttribute="centerY" id="WbP-gi-AEN"/>
                         <constraint firstItem="ddC-kQ-sOC" firstAttribute="top" secondItem="Oz5-jj-1dr" secondAttribute="top" id="bb7-SY-3ss"/>
                         <constraint firstAttribute="trailing" secondItem="R1Q-yc-3pH" secondAttribute="trailing" constant="16" id="eR7-g2-BKs"/>
                         <constraint firstItem="O0J-cK-yh1" firstAttribute="leading" secondItem="Oz5-jj-1dr" secondAttribute="leading" constant="8" id="gHz-Nz-RSC"/>
                         <constraint firstAttribute="bottom" secondItem="O0J-cK-yh1" secondAttribute="bottom" id="hza-Id-9nG"/>
                         <constraint firstAttribute="trailing" secondItem="ddC-kQ-sOC" secondAttribute="trailing" constant="8" id="pUo-Xs-tXZ"/>
+                        <constraint firstItem="Qg2-Ef-s1y" firstAttribute="centerX" secondItem="Oz5-jj-1dr" secondAttribute="centerX" id="yyJ-2c-kY5"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H2c-TA-0Gf" userLabel="productCollectionCV">
@@ -88,7 +96,7 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" systemColor="systemGray6Color"/>
+            <color key="backgroundColor" white="0.0" alpha="0.80221224146962955" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="H2c-TA-0Gf" secondAttribute="bottom" id="6C6-Bf-nzD"/>
                 <constraint firstItem="H2c-TA-0Gf" firstAttribute="top" secondItem="Oz5-jj-1dr" secondAttribute="bottom" id="F8G-k0-ibx"/>
@@ -104,9 +112,6 @@
     <resources>
         <image name="back-white" width="67" height="45"/>
         <image name="shopping-cart" width="512" height="512"/>
-        <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
