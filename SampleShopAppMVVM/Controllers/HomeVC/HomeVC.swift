@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class HomeVC: UIViewController {
 
@@ -16,6 +17,7 @@ class HomeVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        KingfisherManager.shared.cache.clearMemoryCache()
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     

@@ -101,6 +101,7 @@ class ProductListViewModel {
     func getTotalCartItem() -> Int {
         return self.productCartListViewModel?.productCarts?.totalQuantity ?? 0
     }
+    
 }
 
 //MARK: - ProductCartListViewModelProtocol

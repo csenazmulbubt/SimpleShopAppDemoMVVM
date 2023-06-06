@@ -71,4 +71,8 @@ class ProductCartListViewModel  {
                 }
             }
     }
+    
+    deinit {
+        print("Cart deinit")
+    }
 }

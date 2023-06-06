@@ -39,6 +39,10 @@ class ProductCollectionViewCell: UICollectionViewCell {
         if product != nil {
             productTitleLabel.text = product!.title
             priceLabel.text = "$\(product!.price)"
+            
+            if let firstImageURL = product!.images.first {
+                self.productImageView.setImage(with: firstImageURL)
+            }
         }
     }
 }

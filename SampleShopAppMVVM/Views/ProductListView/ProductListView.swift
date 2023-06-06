@@ -60,7 +60,8 @@ class ProductListView: UIView {
                                                                         scheme: .https,
                                                                         endPath: ProductPathRequestType.getProducts.path,
                                                                         headers: nil)
-        self.debounce.dispatch {
+        self.debounce.dispatch { [weak self] in
+            guard let self = self else { return }
             self.productListViewModel.startProductRequest(URLReuquestBuilder: URLRequestBuilder)
         }
     }
@@ -75,6 +76,10 @@ class ProductListView: UIView {
     
     private func updateCartLable() -> Void {
         self.totalCartItemShowLabel.text = "\(productListViewModel.getTotalCartItem())"
+    }
+    
+    deinit {
+        print("Deinit Call Product List View")
     }
 }
 

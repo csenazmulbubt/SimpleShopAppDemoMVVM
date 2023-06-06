@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import Kingfisher
 
 class ProductListVC: UIViewController {
     
@@ -20,6 +21,10 @@ class ProductListVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    deinit {
+        print("Deinit Call")
     }
 }
 
