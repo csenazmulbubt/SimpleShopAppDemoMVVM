@@ -13,6 +13,7 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //KingfisherManager.shared.cache.memoryStorage.config.totalCostLimit = 30_000
+        //KingfisherManager.shared.cache.memoryStorage.config.countLimit = 30
     }
     
     override func viewWillAppear(_ animated: Bool) {
