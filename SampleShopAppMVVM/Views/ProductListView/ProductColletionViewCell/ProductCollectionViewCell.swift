@@ -17,6 +17,8 @@ class ProductCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var productTitleLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var cartAddButton: UIButton!
+    @IBOutlet weak var percentageOffCV: UIView!
+    @IBOutlet weak var percentageLabel: UILabel!
    
     weak var delegate: ProductCollectionViewCellDelegate? = nil
     static let cellReuseIdentifier = "ProductCollectionViewCell"
@@ -28,6 +30,9 @@ class ProductCollectionViewCell: UICollectionViewCell {
             self.layer.cornerRadius = 8
             self.productTitleLabel.layer.cornerRadius = 8
             self.cartAddButton.layer.cornerRadius = 8
+            self.percentageOffCV.layer.cornerRadius = 4
+            self.percentageOffCV.layer.borderWidth = 1.5
+            self.percentageOffCV.layer.borderColor = UIColor.red.cgColor
         }
     }
     
@@ -39,6 +44,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         if product != nil {
             productTitleLabel.text = product!.title
             priceLabel.text = "$\(product!.price)"
+            percentageLabel.text = "\(product!.discountPercentage)% off"
             
             if let firstImageURL = product!.images.first {
                 self.productImageView.setImage(with: firstImageURL)
