@@ -69,21 +69,21 @@
                                     <constraint firstItem="Qcc-dY-fEO" firstAttribute="top" secondItem="vu0-zr-QLE" secondAttribute="bottom" id="zyS-4U-xtG"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kqd-QT-xdY">
-                                <rect key="frame" x="103" y="8" width="56" height="30"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kqd-QT-xdY">
+                                <rect key="frame" x="83.5" y="0.0" width="67.5" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12% off" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NEz-T8-3tQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="56" height="30"/>
+                                        <rect key="frame" x="0.0" y="4" width="67.5" height="26"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
                                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="NEz-T8-3tQ" firstAttribute="top" secondItem="Kqd-QT-xdY" secondAttribute="top" id="4BF-hg-FEM"/>
-                                    <constraint firstAttribute="width" secondItem="Kqd-QT-xdY" secondAttribute="height" multiplier="15:8" id="MXS-8f-ij5"/>
+                                    <constraint firstItem="NEz-T8-3tQ" firstAttribute="top" secondItem="Kqd-QT-xdY" secondAttribute="top" constant="4" id="4BF-hg-FEM"/>
+                                    <constraint firstAttribute="width" secondItem="Kqd-QT-xdY" secondAttribute="height" multiplier="18:8" id="MXS-8f-ij5"/>
                                     <constraint firstAttribute="trailing" secondItem="NEz-T8-3tQ" secondAttribute="trailing" id="NRu-qF-3Ym"/>
                                     <constraint firstAttribute="bottom" secondItem="NEz-T8-3tQ" secondAttribute="bottom" id="Tls-jD-3nw"/>
                                     <constraint firstItem="NEz-T8-3tQ" firstAttribute="leading" secondItem="Kqd-QT-xdY" secondAttribute="leading" id="gaa-Cn-l1l"/>
@@ -99,10 +99,10 @@
                             <constraint firstItem="O4f-uu-tB0" firstAttribute="top" secondItem="SeP-vx-6bo" secondAttribute="bottom" id="bXq-Ny-rqu"/>
                             <constraint firstItem="SeP-vx-6bo" firstAttribute="height" secondItem="QKA-u8-g9i" secondAttribute="height" multiplier="0.6" id="bkY-3B-zH1"/>
                             <constraint firstItem="SeP-vx-6bo" firstAttribute="leading" secondItem="QKA-u8-g9i" secondAttribute="leading" id="dB5-pd-M7Y"/>
-                            <constraint firstAttribute="trailing" secondItem="Kqd-QT-xdY" secondAttribute="trailing" id="kdA-JS-evX"/>
+                            <constraint firstAttribute="trailing" secondItem="Kqd-QT-xdY" secondAttribute="trailing" constant="8" id="kdA-JS-evX"/>
                             <constraint firstAttribute="trailing" secondItem="O4f-uu-tB0" secondAttribute="trailing" id="r9X-LF-I3o"/>
                             <constraint firstAttribute="trailing" secondItem="SeP-vx-6bo" secondAttribute="trailing" id="sw1-T8-QCd"/>
-                            <constraint firstItem="Kqd-QT-xdY" firstAttribute="top" secondItem="QKA-u8-g9i" secondAttribute="top" constant="8" id="ufy-lz-IBb"/>
+                            <constraint firstItem="Kqd-QT-xdY" firstAttribute="top" secondItem="QKA-u8-g9i" secondAttribute="top" id="ufy-lz-IBb"/>
                         </constraints>
                     </view>
                 </subviews>

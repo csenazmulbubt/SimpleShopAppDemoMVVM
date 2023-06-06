@@ -165,11 +165,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0039EEEC2A2FB1DC0055E9F0 /* ProductCartVC */ = {
+		0039EEEC2A2FB1DC0055E9F0 /* ProductCartListVC */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = ProductCartVC;
+			path = ProductCartListVC;
 			sourceTree = "<group>";
 		};
 		003AC1CE2A29BD4C002A5A32 /* NetworkService */ = {
@@ -439,7 +439,7 @@
 		00A4483529FA840900D51AE7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				0039EEEC2A2FB1DC0055E9F0 /* ProductCartVC */,
+				0039EEEC2A2FB1DC0055E9F0 /* ProductCartListVC */,
 				007AC4512A2B961F007C1B1F /* SearchProductListVC */,
 				007AC4462A2B4DD1007C1B1F /* HomeVC */,
 				00A4483D29FAD8EE00D51AE7 /* ProductsListVC */,

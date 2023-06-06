@@ -4,11 +4,10 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductCart"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -25,33 +24,13 @@
                             <inset key="imageEdgeInsets" minX="8" minY="12" maxX="8" maxY="12"/>
                             <state key="normal" image="back-white"/>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P2C-yY-2Mt">
-                            <rect key="frame" x="362" y="0.0" width="44" height="44"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstAttribute="width" secondItem="P2C-yY-2Mt" secondAttribute="height" multiplier="1:1" id="5ga-Rh-8jh"/>
-                            </constraints>
-                            <inset key="imageEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
-                            <state key="normal" image="shopping-cart"/>
-                        </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nMG-JT-7Xi">
-                            <rect key="frame" x="391" y="0.0" width="7" height="13.5"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="WcG-i7-RA8" firstAttribute="top" secondItem="ZTa-Ts-psC" secondAttribute="top" id="2Kh-Ty-WQu"/>
-                        <constraint firstItem="P2C-yY-2Mt" firstAttribute="top" secondItem="ZTa-Ts-psC" secondAttribute="top" id="2aT-fL-OTL"/>
-                        <constraint firstAttribute="trailing" secondItem="nMG-JT-7Xi" secondAttribute="trailing" constant="16" id="Ejk-Cf-NkL"/>
                         <constraint firstAttribute="bottom" secondItem="WcG-i7-RA8" secondAttribute="bottom" id="Isr-ff-yhH"/>
-                        <constraint firstAttribute="trailing" secondItem="P2C-yY-2Mt" secondAttribute="trailing" constant="8" id="Qsy-NC-z8W"/>
-                        <constraint firstAttribute="bottom" secondItem="P2C-yY-2Mt" secondAttribute="bottom" id="WAC-nD-EaX"/>
                         <constraint firstAttribute="height" constant="44" id="iiy-Qq-xHi"/>
                         <constraint firstItem="WcG-i7-RA8" firstAttribute="leading" secondItem="ZTa-Ts-psC" secondAttribute="leading" id="jeM-gH-8lf"/>
-                        <constraint firstItem="nMG-JT-7Xi" firstAttribute="top" secondItem="ZTa-Ts-psC" secondAttribute="top" id="jke-3E-tDr"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eBQ-kO-GjJ">
@@ -59,10 +38,10 @@
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="jUt-mz-4Ua">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </tableView>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBrownColor"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="jUt-mz-4Ua" secondAttribute="bottom" id="9YB-qy-Pe8"/>
                         <constraint firstAttribute="trailing" secondItem="jUt-mz-4Ua" secondAttribute="trailing" id="X9L-22-sKg"/>
@@ -72,7 +51,7 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="ZTa-Ts-psC" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="02K-5V-jO6"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="eBQ-kO-GjJ" secondAttribute="bottom" id="8ow-Km-aYo"/>
@@ -87,12 +66,5 @@
     </objects>
     <resources>
         <image name="back-white" width="67" height="45"/>
-        <image name="shopping-cart" width="512" height="512"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBrownColor">
-            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
     </resources>
 </document>
