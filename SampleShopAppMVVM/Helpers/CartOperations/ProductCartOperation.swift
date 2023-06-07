@@ -40,26 +40,6 @@ class ProductCartOperation: CartProtocol {
 }
 
 
-/*class CartViewModel: where CartProtocol == ProductCart {
-    private let cart: CartProtocol
-    
-    init(cart: CartProtocol) {
-        self.cart = cart
-    }
-    
-    func addToCart(_ product: Product) {
-        cart.addToCart(product)
-    }
-    
-    func removeFromCart(_ product: Product) {
-        cart.removeFromCart(product)
-    }
-    
-    func clearCart() {
-        cart.clearCart()
-    }
-}*/
-
 
 
 

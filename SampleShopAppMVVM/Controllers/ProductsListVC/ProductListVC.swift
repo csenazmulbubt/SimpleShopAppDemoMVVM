@@ -25,6 +25,7 @@ class ProductListVC: UIViewController {
     
     func gotoCartListVC() -> Void {
         let vc = AppStoryboard.Main.viewController(vc: ProductCartListVC.self)
+        vc.productListViewModel = productListView.productListViewModel
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

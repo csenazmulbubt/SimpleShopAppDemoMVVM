@@ -76,6 +76,7 @@ class ProductListView: UIView {
     }
     
     private func updateCartLable() -> Void {
+        let productList = productListViewModel.getProductListBasedOnCartItems()
         self.totalCartItemShowLabel.text = "\(productListViewModel.getTotalCartItem())"
     }
     
@@ -167,7 +168,7 @@ extension ProductListView: ProductCollectionViewCellDelegate {
 }
 
 //MARK: - ProductViewModelDelegate
-extension ProductListView: ProductViewModelDelegate {
+extension ProductListView: ProductListViewModelDelegate {
     func didReceiveProductResponseStatus(_ Response: ResoponseStatus) {
         DispatchQueue.main.async {
             switch Response {

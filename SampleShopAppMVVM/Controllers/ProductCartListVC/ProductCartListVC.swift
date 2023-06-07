@@ -11,7 +11,8 @@ class ProductCartListVC: UIViewController {
     
     @IBOutlet weak var productCartListView: ProductCartListView!
     
-
+    public var productListViewModel: ProductListViewModel? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.productCartListView.delegate = self
@@ -21,6 +22,7 @@ class ProductCartListVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.showHideNavigationBarHidden()
+        self.productCartListView.productListViewModel = self.productListViewModel
     }
     
 }

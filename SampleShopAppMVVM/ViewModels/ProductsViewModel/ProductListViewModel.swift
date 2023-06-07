@@ -7,21 +7,21 @@
 
 import Foundation
 
-protocol ProductViewModelDelegate: NSObjectProtocol {
+protocol ProductListViewModelDelegate: NSObjectProtocol {
     func didReceiveProductResponseStatus(_ Response: ResoponseStatus)
     func didReceiveCartOperationStatus(responseStatus: ResoponseStatus)
 }
 
 class ProductListViewModel {
     
-    weak var delegate: ProductViewModelDelegate?
+    weak var delegate: ProductListViewModelDelegate?
     
     private let networkService: NetworkServiceProtcol
     private var products: Products? = nil
     public var hasMorePage: Bool = true
     public var productArray: [Product] = []
     private var currentResponseStatus: ResoponseStatus = .success
-    private var productCartListViewModel: ProductCartListViewModel? = nil
+    public var productCartListViewModel: ProductCartListViewModel? = nil
     
     init(_ networkService: NetworkServiceProtcol,
          cartService: CartProtocol? = nil) {
@@ -100,6 +100,12 @@ class ProductListViewModel {
     
     func getTotalCartItem() -> Int {
         return self.productCartListViewModel?.productCarts?.totalQuantity ?? 0
+    }
+    
+    func getProductListBasedOnCartItems() -> [Product] {
+        guard let cartProducts = self.productCartListViewModel?.productCarts?.products else { return [] }
+        let cartProductIDs = cartProducts.map { $0.id }
+        return self.productArray.filter { cartProductIDs.contains($0.id) }
     }
 }
 

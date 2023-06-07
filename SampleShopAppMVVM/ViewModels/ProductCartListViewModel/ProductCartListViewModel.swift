@@ -13,7 +13,6 @@ protocol ProductCartListViewModelProtocol: AnyObject {
 
 class ProductCartListViewModel  {
     
-   
     weak var delegate: ProductCartListViewModelProtocol?
     
     private let debounce = Debounce(timeInterval: 0.5, queue: .global(qos: .userInitiated))
@@ -26,6 +25,10 @@ class ProductCartListViewModel  {
          networkServiceProtocol: NetworkServiceProtcol) {
         self.cart = cart
         self.networkService = networkServiceProtocol
+    }
+    
+    public var productCartList: [ProductCartResponse]? {
+        return self.productCarts?.products
     }
     
     func addToCart(_ product: ProductCart) -> Void {

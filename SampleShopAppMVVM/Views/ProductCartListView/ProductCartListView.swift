@@ -18,6 +18,16 @@ class ProductCartListView: UIView {
     
     weak var delegate: ProductCartListViewDelegate? = nil
     static let nibName = "ProductCartListView"
+    public var productList: [Product] = []
+    private var totalItemSecondSection = 0
+    
+    public var productListViewModel: ProductListViewModel? = nil {
+        didSet {
+            self.productList = productListViewModel?.getProductListBasedOnCartItems() ?? []
+            self.totalItemSecondSection = self.productList.isEmpty ? 0 : 1
+            self.productCartListTableView.reloadData()
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,6 +49,7 @@ class ProductCartListView: UIView {
     
     private func initialSetup() -> Void {
         self.productCartListTableView.register(UINib(nibName: ProductCartTableViewCell.cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: ProductCartTableViewCell.cellReuseIdentifier)
+        self.productCartListTableView.register(UINib(nibName: ProductCartResultTableViewCell.cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: ProductCartResultTableViewCell.cellReuseIdentifier)
         self.productCartListTableView.separatorStyle = .none
         
         self.productCartListTableView.delegate = self
@@ -54,16 +65,35 @@ class ProductCartListView: UIView {
 //MARK: - UITableViewDataSource
 extension ProductCartListView: UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+       
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 10
+        if section == 0 {
+            return self.productList.count
+        }
+       
+        return totalItemSecondSection
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ProductCartTableViewCell.cellReuseIdentifier, for: indexPath) as? ProductCartTableViewCell else { return UITableViewCell() }
-        
-        return cell
+        if indexPath.section == 0 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: ProductCartTableViewCell.cellReuseIdentifier, for: indexPath) as? ProductCartTableViewCell else { return UITableViewCell() }
+            
+            cell.setupCell(product: productList[safe: indexPath.row],
+                           productCartResponse: productListViewModel?.productCartListViewModel?.productCartList?[safe: indexPath.row])
+            return cell
+        }
+        else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: ProductCartResultTableViewCell.cellReuseIdentifier, for: indexPath) as? ProductCartResultTableViewCell else { return UITableViewCell() }
+            
+            cell.setupCell(productCartResponse: productListViewModel?.productCartListViewModel?.productCarts)
+            return cell
+        }
     }
 }
 
