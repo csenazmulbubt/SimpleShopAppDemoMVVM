@@ -25,6 +25,7 @@ class ProductCartListView: UIView {
         didSet {
             self.productList = productListViewModel?.getProductListBasedOnCartItems() ?? []
             self.totalItemSecondSection = self.productList.isEmpty ? 0 : 1
+            self.productListViewModel?.productCartListViewModel?.delegate = self
             self.productCartListTableView.reloadData()
         }
     }
@@ -84,6 +85,8 @@ extension ProductCartListView: UITableViewDataSource {
         if indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ProductCartTableViewCell.cellReuseIdentifier, for: indexPath) as? ProductCartTableViewCell else { return UITableViewCell() }
             
+            cell.delegate = self
+            
             cell.setupCell(product: productList[safe: indexPath.row],
                            productCartResponse: productListViewModel?.productCartListViewModel?.productCartList?[safe: indexPath.row])
             return cell
@@ -104,5 +107,33 @@ extension ProductCartListView: UITableViewDelegate {
         
        return 150
     }
+}
 
+//MARK: - ProductCartTableViewCellDelegate
+extension ProductCartListView: ProductCartTableViewCellDelegate {
+    func tappedOnIncrementButton(productId: Int) {
+        self.productListViewModel?.productCartListViewModel?.addToCart(ProductCart(id: productId, quantity: 1))
+    }
+    
+    func tappedOnDecrementButton(productId: Int) {
+        self.productListViewModel?.productCartListViewModel?.removeFromCart(ProductCart(id: productId, quantity: 1))
+    }
+}
+
+//MARK: - ProductCartListViewModelDelegate
+extension ProductCartListView: ProductCartListViewModelDelegate {
+    func didReceiveCartOperationStatus(_ responseStatus: ResoponseStatus) {
+        
+        DispatchQueue.main.async {
+            switch responseStatus {
+            case .loading:
+                break
+            case .success:
+                self.productCartListTableView.reloadData()
+                print("Success")
+            case .failure(let error):
+                print("Failure",error)
+            }
+        }
+    }
 }

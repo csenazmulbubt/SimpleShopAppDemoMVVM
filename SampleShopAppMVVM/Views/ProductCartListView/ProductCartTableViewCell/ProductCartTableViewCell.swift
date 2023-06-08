@@ -7,6 +7,12 @@
 
 import UIKit
 
+protocol ProductCartTableViewCellDelegate: AnyObject {
+    
+    func tappedOnIncrementButton(productId: Int)
+    func tappedOnDecrementButton(productId: Int)
+}
+
 class ProductCartTableViewCell: UITableViewCell {
     
     @IBOutlet weak var productImageCV: UIView!
@@ -16,9 +22,9 @@ class ProductCartTableViewCell: UITableViewCell {
     @IBOutlet weak var decreamentButton: UIButton!
     @IBOutlet weak var totalProductLabel: UILabel!
     @IBOutlet weak var incrementButton: UIButton!
-    
     @IBOutlet weak var productTitleLable: UILabel!
     
+    weak var delegate: ProductCartTableViewCellDelegate? = nil
     static let cellReuseIdentifier = "ProductCartTableViewCell"
     
     override func awakeFromNib() {
@@ -42,12 +48,12 @@ class ProductCartTableViewCell: UITableViewCell {
     
     
     @IBAction func tappedOnDecreamentButton(_ sender: UIButton) {
-        
+        delegate?.tappedOnDecrementButton(productId: sender.tag)
     }
     
     
     @IBAction func tappedOnIncrementButton(_ sender: UIButton) {
-        
+        delegate?.tappedOnIncrementButton(productId: sender.tag)
     }
     
     func setupCell(product: Product?,
@@ -60,6 +66,8 @@ class ProductCartTableViewCell: UITableViewCell {
         self.totalProductLabel.text = "\(productCartResponse?.quantity ?? 0)"
         self.currentPriceLabel.text = "\(productCartResponse?.discountedPrice ?? 0)"
         self.previousPriceLabel.text = "\(productCartResponse?.total ?? 0)"
+        self.incrementButton.tag = product?.id ?? 0
+        self.decreamentButton.tag = product?.id ?? 0
     }
     
 }

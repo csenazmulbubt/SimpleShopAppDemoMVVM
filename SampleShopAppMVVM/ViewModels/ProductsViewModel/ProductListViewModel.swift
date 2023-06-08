@@ -110,7 +110,7 @@ class ProductListViewModel {
 }
 
 //MARK: - ProductCartListViewModelProtocol
-extension ProductListViewModel: ProductCartListViewModelProtocol {
+extension ProductListViewModel: ProductCartListViewModelDelegate {
     
     func didReceiveCartOperationStatus(_ responseStatus: ResoponseStatus) {
         delegate?.didReceiveCartOperationStatus(responseStatus: responseStatus)

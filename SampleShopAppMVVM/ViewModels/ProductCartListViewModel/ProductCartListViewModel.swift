@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol ProductCartListViewModelProtocol: AnyObject {
+protocol ProductCartListViewModelDelegate: AnyObject {
     func didReceiveCartOperationStatus(_ responseStatus: ResoponseStatus)
 }
 
 class ProductCartListViewModel  {
     
-    weak var delegate: ProductCartListViewModelProtocol?
+    weak var delegate: ProductCartListViewModelDelegate?
     
     private let debounce = Debounce(timeInterval: 0.5, queue: .global(qos: .userInitiated))
     private let cart: CartProtocol
