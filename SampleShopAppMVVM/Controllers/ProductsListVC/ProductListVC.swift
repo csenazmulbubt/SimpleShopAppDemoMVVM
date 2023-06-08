@@ -21,6 +21,8 @@ class ProductListVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.showHideNavigationBarHidden()
+        self.productListView.updateCartLable()
+        self.productListView.productListViewModel.setProductCartDelegate()
     }
     
     func gotoCartListVC() -> Void {

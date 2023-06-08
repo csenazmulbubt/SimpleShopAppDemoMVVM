@@ -130,7 +130,6 @@ extension ProductCartListView: ProductCartListViewModelDelegate {
                 break
             case .success:
                 self.productCartListTableView.reloadData()
-                print("Success")
             case .failure(let error):
                 print("Failure",error)
             }

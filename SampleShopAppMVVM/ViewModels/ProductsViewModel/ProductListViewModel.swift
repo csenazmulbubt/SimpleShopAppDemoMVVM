@@ -28,8 +28,12 @@ class ProductListViewModel {
         self.networkService = networkService
         if let cartService = cartService {
             self.productCartListViewModel = ProductCartListViewModel(cartService, networkServiceProtocol: networkService)
-            self.productCartListViewModel?.delegate = self
+            self.setProductCartDelegate()
         }
+    }
+    
+    public func setProductCartDelegate() -> Void {
+        self.productCartListViewModel?.delegate = self
     }
     
     public var isNeedLoadMorePage: Bool {

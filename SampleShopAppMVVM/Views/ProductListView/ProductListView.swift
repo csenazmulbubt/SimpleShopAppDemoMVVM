@@ -75,8 +75,7 @@ class ProductListView: UIView {
         self.delegate?.tappedOnBackButton()
     }
     
-    private func updateCartLable() -> Void {
-        let productList = productListViewModel.getProductListBasedOnCartItems()
+    func updateCartLable() -> Void {
         self.totalCartItemShowLabel.text = "\(productListViewModel.getTotalCartItem())"
     }
     

@@ -16,13 +16,13 @@ class ProductCartListVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.productCartListView.delegate = self
+        self.productCartListView.productListViewModel = self.productListViewModel
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.showHideNavigationBarHidden()
-        self.productCartListView.productListViewModel = self.productListViewModel
     }
     
 }
