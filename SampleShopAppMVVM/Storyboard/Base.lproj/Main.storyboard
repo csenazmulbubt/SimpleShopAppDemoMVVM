@@ -175,6 +175,36 @@
             </objects>
             <point key="canvasLocation" x="3530" y="86"/>
         </scene>
+        <!--Product DetailsVC-->
+        <scene sceneID="EP2-9L-8um">
+            <objects>
+                <viewController storyboardIdentifier="ProductDetailsVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mOa-85-3Wd" customClass="ProductDetailsVC" customModule="SampleShopAppMVVM" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4OY-kI-b4z">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YVS-ag-ygZ" customClass="ProductDetailsView" customModule="SampleShopAppMVVM" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Yub-aE-fHt"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="YVS-ag-ygZ" firstAttribute="leading" secondItem="Yub-aE-fHt" secondAttribute="leading" id="0gc-XP-jdG"/>
+                            <constraint firstItem="YVS-ag-ygZ" firstAttribute="top" secondItem="Yub-aE-fHt" secondAttribute="top" id="Nr4-Bl-Htp"/>
+                            <constraint firstItem="Yub-aE-fHt" firstAttribute="trailing" secondItem="YVS-ag-ygZ" secondAttribute="trailing" id="bnM-Qo-aI7"/>
+                            <constraint firstItem="Yub-aE-fHt" firstAttribute="bottom" secondItem="YVS-ag-ygZ" secondAttribute="bottom" id="hh1-wl-HKO"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="productDetailsView" destination="YVS-ag-ygZ" id="zP2-od-GQ0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YvQ-OS-ke4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4510" y="67"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="ywd-nW-q3i">
             <objects>

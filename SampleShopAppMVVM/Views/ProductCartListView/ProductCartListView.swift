@@ -84,11 +84,12 @@ extension ProductCartListView: UITableViewDataSource {
         
         if indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ProductCartTableViewCell.cellReuseIdentifier, for: indexPath) as? ProductCartTableViewCell else { return UITableViewCell() }
-            
+           
+            let productCartResponse = productListViewModel?.productCartListViewModel?.productCartList?.filter { $0.id ==  productList[safe: indexPath.row]?.id ?? 0}
+           
             cell.delegate = self
-            
             cell.setupCell(product: productList[safe: indexPath.row],
-                           productCartResponse: productListViewModel?.productCartListViewModel?.productCartList?[safe: indexPath.row])
+                           productCartResponse: productCartResponse?.first)
             return cell
         }
         else {
@@ -112,10 +113,16 @@ extension ProductCartListView: UITableViewDelegate {
 //MARK: - ProductCartTableViewCellDelegate
 extension ProductCartListView: ProductCartTableViewCellDelegate {
     func tappedOnIncrementButton(productId: Int) {
+        productList.forEach { pro in
+            print("ProductIncrement",pro.id,productId)
+        }
         self.productListViewModel?.productCartListViewModel?.addToCart(ProductCart(id: productId, quantity: 1))
     }
     
     func tappedOnDecrementButton(productId: Int) {
+        productList.forEach { pro in
+            print("ProductDecremen \(pro.id)",productId)
+        }
         self.productListViewModel?.productCartListViewModel?.removeFromCart(ProductCart(id: productId, quantity: 1))
     }
 }

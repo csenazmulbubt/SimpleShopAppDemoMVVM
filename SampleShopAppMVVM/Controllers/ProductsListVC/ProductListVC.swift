@@ -30,10 +30,20 @@ class ProductListVC: UIViewController {
         vc.productListViewModel = productListView.productListViewModel
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func gotoProductDetailsVC(_ product: Product) -> Void {
+        let vc = AppStoryboard.Main.viewController(vc: ProductDetailsVC.self)
+        vc.product = product
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 //MARK: - ProductListViewDelegate
 extension ProductListVC: ProductListViewDelegate {
+    func showProductDetails(product: Product) {
+        self.gotoProductDetailsVC(product)
+    }
+    
     func tappedOnBackButton() {
         self.navigationController?.popViewController(animated: true)
     }

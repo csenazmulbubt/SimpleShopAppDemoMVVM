@@ -10,6 +10,7 @@ import UIKit
 protocol ProductListViewDelegate: AnyObject {
     func tappedOnBackButton()
     func tappedOnCartButton()
+    func showProductDetails(product: Product)
 }
 
 class ProductListView: UIView {
@@ -122,11 +123,20 @@ extension ProductListView: UICollectionViewDataSource {
 //MARK: - UICollectionViewDelegate
 extension ProductListView: UICollectionViewDelegate {
     
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView,
+                        willDisplay cell: UICollectionViewCell,
+                        forItemAt indexPath: IndexPath) {
         
         if indexPath.section == 1 && productListViewModel.isNeedLoadMorePage{
             self.startProductFetchRequest()
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        didSelectItemAt indexPath: IndexPath) {
+        
+        delegate?.showProductDetails(product: productListViewModel.productArray[indexPath.item])
+        
     }
 }
 
