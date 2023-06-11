@@ -206,12 +206,12 @@
 			path = Products;
 			sourceTree = "<group>";
 		};
-		003AC1D42A29C3E6002A5A32 /* ProductsViewModel */ = {
+		003AC1D42A29C3E6002A5A32 /* ProductListViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				003AC1D52A29C403002A5A32 /* ProductListViewModel.swift */,
 			);
-			path = ProductsViewModel;
+			path = ProductListViewModel;
 			sourceTree = "<group>";
 		};
 		003AC1D72A29EA62002A5A32 /* JSONEncodingDecoding */ = {
@@ -256,6 +256,109 @@
 				0057AA472A2DE3DE006ADE48 /* ProductCartTableViewCell.xib */,
 			);
 			path = ProductCartTableViewCell;
+			sourceTree = "<group>";
+		};
+		00601EA42A35DBAB00B3345E /* ProductDetails */ = {
+			isa = PBXGroup;
+			children = (
+				0046976F2A3251C400515577 /* ProductDetailsVC */,
+				00601EA52A35DBC200B3345E /* Views */,
+				00601EA62A35DBDF00B3345E /* ViewModels */,
+			);
+			path = ProductDetails;
+			sourceTree = "<group>";
+		};
+		00601EA52A35DBC200B3345E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				004697652A321FCD00515577 /* ProductDetailsView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		00601EA62A35DBDF00B3345E /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		00601EA72A35DC2E00B3345E /* ProductList */ = {
+			isa = PBXGroup;
+			children = (
+				00A4483D29FAD8EE00D51AE7 /* ProductsListVC */,
+				00601EA82A35DC5700B3345E /* Views */,
+				00601EAB2A35DDC300B3345E /* ViewModels */,
+			);
+			path = ProductList;
+			sourceTree = "<group>";
+		};
+		00601EA82A35DC5700B3345E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				00C975E12A285B5400EBA38D /* ProductListView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		00601EA92A35DCAC00B3345E /* ProductCartList */ = {
+			isa = PBXGroup;
+			children = (
+				0039EEEC2A2FB1DC0055E9F0 /* ProductCartListVC */,
+				00601EAC2A35DE0100B3345E /* Views */,
+				00601EAD2A35DE0D00B3345E /* ViewModels */,
+			);
+			path = ProductCartList;
+			sourceTree = "<group>";
+		};
+		00601EAA2A35DD2100B3345E /* SearchProductList */ = {
+			isa = PBXGroup;
+			children = (
+				007AC4512A2B961F007C1B1F /* SearchProductListVC */,
+				00601EAE2A35DE3A00B3345E /* Views */,
+				00601EAF2A35DE4300B3345E /* ViewModels */,
+			);
+			path = SearchProductList;
+			sourceTree = "<group>";
+		};
+		00601EAB2A35DDC300B3345E /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				003AC1D42A29C3E6002A5A32 /* ProductListViewModel */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		00601EAC2A35DE0100B3345E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				008E77272A2C6D2900EB5ED6 /* ProductCartListView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		00601EAD2A35DE0D00B3345E /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				008E77382A2C9FC200EB5ED6 /* ProductCartListViewModel */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		00601EAE2A35DE3A00B3345E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				007AC44C2A2B8F21007C1B1F /* SearchProductListView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		00601EAF2A35DE4300B3345E /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				007AC4542A2B98C3007C1B1F /* SearchProductListViewModel */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		007AC4412A2B087C007C1B1F /* IndicatorCollectionViewCell */ = {
@@ -406,8 +509,6 @@
 				00A4483329FA832300D51AE7 /* Application */,
 				00A4483529FA840900D51AE7 /* Controllers */,
 				00A4483029FA82E100D51AE7 /* Models */,
-				00A4483129FA830E00D51AE7 /* Views */,
-				00A4482F29FA82D200D51AE7 /* ViewModels */,
 				00A4483729FA842F00D51AE7 /* Network */,
 				00A4483629FA842000D51AE7 /* Helpers */,
 				00A4483229FA831800D51AE7 /* Resources */,
@@ -434,16 +535,6 @@
 			path = SampleShopAppMVVMUITests;
 			sourceTree = "<group>";
 		};
-		00A4482F29FA82D200D51AE7 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				008E77382A2C9FC200EB5ED6 /* ProductCartListViewModel */,
-				007AC4542A2B98C3007C1B1F /* SearchProductListViewModel */,
-				003AC1D42A29C3E6002A5A32 /* ProductsViewModel */,
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
 		00A4483029FA82E100D51AE7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -452,17 +543,6 @@
 				003AC1D12A29C332002A5A32 /* Products */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		00A4483129FA830E00D51AE7 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				004697652A321FCD00515577 /* ProductDetailsView */,
-				008E77272A2C6D2900EB5ED6 /* ProductCartListView */,
-				007AC44C2A2B8F21007C1B1F /* SearchProductListView */,
-				00C975E12A285B5400EBA38D /* ProductListView */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		00A4483229FA831800D51AE7 /* Resources */ = {
@@ -485,11 +565,11 @@
 		00A4483529FA840900D51AE7 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				0046976F2A3251C400515577 /* ProductDetailsVC */,
-				0039EEEC2A2FB1DC0055E9F0 /* ProductCartListVC */,
-				007AC4512A2B961F007C1B1F /* SearchProductListVC */,
+				00601EA42A35DBAB00B3345E /* ProductDetails */,
+				00601EA72A35DC2E00B3345E /* ProductList */,
+				00601EA92A35DCAC00B3345E /* ProductCartList */,
+				00601EAA2A35DD2100B3345E /* SearchProductList */,
 				007AC4462A2B4DD1007C1B1F /* HomeVC */,
-				00A4483D29FAD8EE00D51AE7 /* ProductsListVC */,
 				00A4483C29FA939F00D51AE7 /* Registration */,
 				00A4483B29FA896300D51AE7 /* LoginVC */,
 			);
