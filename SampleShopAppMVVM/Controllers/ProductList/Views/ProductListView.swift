@@ -10,11 +10,13 @@ import UIKit
 protocol ProductListViewDelegate: AnyObject {
     func tappedOnBackButton()
     func tappedOnCartButton()
-    func showProductDetails(product: Product)
+    func showProductDetails(productIndex: Int)
+    func tappedOnAddCartButton(productIndex: Int)
+    func fetchProductRequest(URLRequestBuilder: URLRequestBuilder)
 }
 
 class ProductListView: UIView {
-
+    
     @IBOutlet weak var productCollectionView: UICollectionView!
     @IBOutlet weak var totalCartItemShowLabel: UILabel!
     
@@ -22,8 +24,10 @@ class ProductListView: UIView {
     static let nibName = "ProductListView"
     private let section = 2
     
-    let productListViewModel = ProductListViewModel(NetworkService(), cartService: ProductCartOperation())
-    let debounce = Debounce(timeInterval: 1.0, queue: .global(qos: .userInitiated))
+    private let debounce = Debounce(timeInterval: 0.5, queue: .global(qos: .userInitiated))
+    private var productArray: [Product] = []
+    private var hasMorePage: Bool = true
+    private var isNeedLoadMorePage: Bool = true
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -49,13 +53,12 @@ class ProductListView: UIView {
         self.productCollectionView.register(UINib(nibName: IndicatorCollectionViewCell.cellReuseIdentifier, bundle: nil), forCellWithReuseIdentifier: IndicatorCollectionViewCell.cellReuseIdentifier)
         self.productCollectionView.delegate = self
         self.productCollectionView.dataSource = self
-        self.productListViewModel.delegate = self
         self.startProductFetchRequest()
     }
     
     private func startProductFetchRequest() -> Void {
         var paraDict: [String: String] = ["limit": "10" ]
-        paraDict ["skip"] = "\(productListViewModel.productArray.count)"
+        paraDict ["skip"] = "\(self.productArray.count)"
         let URLRequestBuilder = URLRequestBuilder.makeURLRequestBuilder(paraDict,
                                                                         httpMethod: .get,
                                                                         host: .dummyHost,
@@ -64,7 +67,7 @@ class ProductListView: UIView {
                                                                         headers: nil)
         self.debounce.dispatch { [weak self] in
             guard let self = self else { return }
-            self.productListViewModel.startProductRequest(URLReuquestBuilder: URLRequestBuilder)
+            self.delegate?.fetchProductRequest(URLRequestBuilder: URLRequestBuilder)
         }
     }
     
@@ -76,8 +79,17 @@ class ProductListView: UIView {
         self.delegate?.tappedOnBackButton()
     }
     
-    func updateCartLable() -> Void {
-        self.totalCartItemShowLabel.text = "\(productListViewModel.getTotalCartItem())"
+    func updateCartLable(totalItem: Int) -> Void {
+        self.totalCartItemShowLabel.text = "\(totalItem)"
+    }
+    
+    public func updateData(product: [Product],
+                           hasMorePage: Bool,
+                           isNeedLoadMorePage: Bool) -> Void {
+        self.productArray = product
+        self.hasMorePage = hasMorePage
+        self.isNeedLoadMorePage = isNeedLoadMorePage
+        self.productCollectionView.reloadData()
     }
     
     deinit {
@@ -93,28 +105,32 @@ extension ProductListView: UICollectionViewDataSource {
         return section
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
         
         if section == 0 {
-            return productListViewModel.productArray.count
+            return productArray.count
         }
         return 1
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if indexPath.section == 0 {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCollectionViewCell.cellReuseIdentifier, for: indexPath) as? ProductCollectionViewCell
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCollectionViewCell.cellReuseIdentifier,
+                                                                for: indexPath) as? ProductCollectionViewCell
             else { return  UICollectionViewCell() }
             cell.cartAddButton.tag = indexPath.item
             cell.delegate = self
-            cell.setupCell(product: productListViewModel.productArray[indexPath.item])
+            cell.setupCell(product: self.productArray[indexPath.item])
             return cell
         }
         else {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IndicatorCollectionViewCell.cellReuseIdentifier, for: indexPath) as? IndicatorCollectionViewCell
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:             IndicatorCollectionViewCell.cellReuseIdentifier,
+                                                                for: indexPath) as? IndicatorCollectionViewCell
             else { return  UICollectionViewCell() }
-            cell.isShowIndicator = self.productListViewModel.hasMorePage
+            cell.isShowIndicator = self.hasMorePage
             return cell
         }
     }
@@ -127,7 +143,7 @@ extension ProductListView: UICollectionViewDelegate {
                         willDisplay cell: UICollectionViewCell,
                         forItemAt indexPath: IndexPath) {
         
-        if indexPath.section == 1 && productListViewModel.isNeedLoadMorePage{
+        if indexPath.section == 1 && self.isNeedLoadMorePage{
             self.startProductFetchRequest()
         }
     }
@@ -135,8 +151,7 @@ extension ProductListView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
         
-        delegate?.showProductDetails(product: productListViewModel.productArray[indexPath.item])
-        
+        self.delegate?.showProductDetails(productIndex: indexPath.item)
     }
 }
 
@@ -172,37 +187,7 @@ extension ProductListView: UICollectionViewDelegateFlowLayout {
 //MARK: - ProductCollectionViewCellDelegate
 extension ProductListView: ProductCollectionViewCellDelegate {
     func tappedOnAddCartButton(tag: Int) {
-        self.productListViewModel.addToCart(productListViewModel.productArray[tag].id)
+        self.delegate?.tappedOnAddCartButton(productIndex: tag)
     }
 }
 
-//MARK: - ProductViewModelDelegate
-extension ProductListView: ProductListViewModelDelegate {
-    func didReceiveProductResponseStatus(_ Response: ResoponseStatus) {
-        DispatchQueue.main.async {
-            switch Response {
-            case .loading:
-                break
-            case .success:
-                self.productCollectionView.reloadData()
-            case .failure(let error):
-                print("Error",error)
-            }
-        }
-    }
-    
-    func didReceiveCartOperationStatus(responseStatus: ResoponseStatus) {
-        DispatchQueue.main.async {
-            switch responseStatus {
-            case .loading:
-                break
-            case .success:
-                self.updateCartLable()
-                 break
-            case .failure(let error):
-                debugPrint("Something went Worng",error)
-                break
-            }
-        }
-    }
-}

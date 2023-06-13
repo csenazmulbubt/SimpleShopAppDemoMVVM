@@ -8,8 +8,8 @@
 import Foundation
 
 protocol ProductListViewModelDelegate: NSObjectProtocol {
-    func didReceiveProductResponseStatus(_ Response: ResoponseStatus)
-    func didReceiveCartOperationStatus(responseStatus: ResoponseStatus)
+    func onProductListUpdateStatus(_ response: ResoponseStatus)
+    func onCartItemsUpdateStatus(responseStatus: ResoponseStatus)
 }
 
 class ProductListViewModel {
@@ -18,9 +18,10 @@ class ProductListViewModel {
     
     private let networkService: NetworkServiceProtcol
     private var products: Products? = nil
+    private var currentResponseStatus: ResoponseStatus = .success
+    
     public var hasMorePage: Bool = true
     public var productArray: [Product] = []
-    private var currentResponseStatus: ResoponseStatus = .success
     public var productCartListViewModel: ProductCartListViewModel? = nil
     
     init(_ networkService: NetworkServiceProtcol,
@@ -42,7 +43,7 @@ class ProductListViewModel {
     
     func startProductRequest(URLReuquestBuilder: URLRequestBuilder) {
         
-        self.delegate?.didReceiveProductResponseStatus(.loading)
+        self.delegate?.onProductListUpdateStatus(.loading)
         self.networkService.sendGetRequest(URLReuquestBuilder: URLReuquestBuilder,
                                            decodingType: Products.self) {
             [weak self] result in
@@ -55,7 +56,7 @@ class ProductListViewModel {
                 case .failure(let error):
                     self.currentResponseStatus = .failure(error.localizedDescription)
                 }
-                self.delegate?.didReceiveProductResponseStatus(self.currentResponseStatus)
+                self.delegate?.onProductListUpdateStatus(self.currentResponseStatus)
             }
         }
     }
@@ -80,24 +81,28 @@ class ProductListViewModel {
     
     func addToCart(_ productId: Int) -> Void {
         if let _ = self.productArray.firstIndex(where: { $0.id == productId}){
-            self.applyCartOperation(isRemove: false, product: ProductCart(id: productId, quantity: 1))
+            self.applyCartOperation(isRemove: false,
+                                    product: ProductCart(id: productId,
+                                                         quantity: 1))
         }
     }
     
     func removeToCart(_ productId: Int) -> Void {
         if let _ = self.productArray.firstIndex(where: { $0.id == productId}){
-            self.applyCartOperation(isRemove: true, product: ProductCart(id: productId, quantity: 1))
+            self.applyCartOperation(isRemove: true,
+                                    product: ProductCart(id: productId,
+                                                         quantity: 1))
         }
     }
     
     private func applyCartOperation(isRemove: Bool,
                                     product: ProductCart) -> Void {
-        guard let productCartListViewModel = self.productCartListViewModel else { return  }
+        guard let productCartListViewModel = self.productCartListViewModel
+        else { return }
         
         if isRemove {
             productCartListViewModel.removeFromCart(product)
-        }
-        else {
+        } else {
             productCartListViewModel.addToCart(product)
         }
     }
@@ -117,6 +122,6 @@ class ProductListViewModel {
 extension ProductListViewModel: ProductCartListViewModelDelegate {
     
     func didReceiveCartOperationStatus(_ responseStatus: ResoponseStatus) {
-        delegate?.didReceiveCartOperationStatus(responseStatus: responseStatus)
+        delegate?.onCartItemsUpdateStatus(responseStatus: responseStatus)
     }
 }
