@@ -10,6 +10,8 @@ import UIKit
 
 protocol ProductCartListViewDelegate: AnyObject {
     func tappedOnBackButton()
+    func tappedOnIncrementButton(productId: Int)
+    func tappedOnDecrementButton(productId: Int)
 }
 
 class ProductCartListView: UIView {
@@ -18,15 +20,12 @@ class ProductCartListView: UIView {
     
     weak var delegate: ProductCartListViewDelegate? = nil
     static let nibName = "ProductCartListView"
-    public var productList: [Product] = []
+    private var productCartsResponse: ProductCartsResponse? = nil
     private var totalItemSecondSection = 0
     
-    public var productListViewModel: ProductListViewModel? = nil {
+    public var productList: [Product] = [] {
         didSet {
-            self.productList = productListViewModel?.getProductListBasedOnCartItems() ?? []
             self.totalItemSecondSection = self.productList.isEmpty ? 0 : 1
-            self.productListViewModel?.productCartListViewModel?.delegate = self
-            self.productCartListTableView.reloadData()
         }
     }
     
@@ -57,6 +56,11 @@ class ProductCartListView: UIView {
         self.productCartListTableView.dataSource = self
     }
     
+    public func updateData(productCartsResponse: ProductCartsResponse) -> Void {
+        self.productCartsResponse = productCartsResponse
+        self.productCartListTableView.reloadData()
+    }
+    
     //MARK: - tapped On Back Button
     @IBAction func tappedOnBackButton(_ sender: UIButton) {
         delegate?.tappedOnBackButton()
@@ -76,7 +80,6 @@ extension ProductCartListView: UITableViewDataSource {
         if section == 0 {
             return self.productList.count
         }
-       
         return totalItemSecondSection
     }
     
@@ -85,8 +88,7 @@ extension ProductCartListView: UITableViewDataSource {
         if indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ProductCartTableViewCell.cellReuseIdentifier, for: indexPath) as? ProductCartTableViewCell else { return UITableViewCell() }
            
-            let productCartResponse = productListViewModel?.productCartListViewModel?.productCartList?.filter { $0.id ==  productList[safe: indexPath.row]?.id ?? 0}
-           
+            let productCartResponse = self.productCartsResponse?.products.filter { $0.id ==  productList[indexPath.row].id}
             cell.delegate = self
             cell.setupCell(product: productList[safe: indexPath.row],
                            productCartResponse: productCartResponse?.first)
@@ -95,7 +97,7 @@ extension ProductCartListView: UITableViewDataSource {
         else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ProductCartResultTableViewCell.cellReuseIdentifier, for: indexPath) as? ProductCartResultTableViewCell else { return UITableViewCell() }
             
-            cell.setupCell(productCartResponse: productListViewModel?.productCartListViewModel?.productCarts)
+            cell.setupCell(productCartResponse: self.productCartsResponse)
             return cell
         }
     }
@@ -113,33 +115,11 @@ extension ProductCartListView: UITableViewDelegate {
 //MARK: - ProductCartTableViewCellDelegate
 extension ProductCartListView: ProductCartTableViewCellDelegate {
     func tappedOnIncrementButton(productId: Int) {
-        productList.forEach { pro in
-            print("ProductIncrement",pro.id,productId)
-        }
-        self.productListViewModel?.productCartListViewModel?.addToCart(ProductCart(id: productId, quantity: 1))
+        print("Product",productId)
+        self.delegate?.tappedOnIncrementButton(productId: productId)
     }
     
     func tappedOnDecrementButton(productId: Int) {
-        productList.forEach { pro in
-            print("ProductDecremen \(pro.id)",productId)
-        }
-        self.productListViewModel?.productCartListViewModel?.removeFromCart(ProductCart(id: productId, quantity: 1))
-    }
-}
-
-//MARK: - ProductCartListViewModelDelegate
-extension ProductCartListView: ProductCartListViewModelDelegate {
-    func didReceiveCartOperationStatus(_ responseStatus: ResoponseStatus) {
-        
-        DispatchQueue.main.async {
-            switch responseStatus {
-            case .loading:
-                break
-            case .success:
-                self.productCartListTableView.reloadData()
-            case .failure(let error):
-                print("Failure",error)
-            }
-        }
+        self.delegate?.tappedOnDecrementButton(productId: productId)
     }
 }

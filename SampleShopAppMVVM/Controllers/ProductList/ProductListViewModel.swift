@@ -73,8 +73,7 @@ class ProductListViewModel {
         if productArray.count < oldProducts.total {
             productArray += newProducts.products
             self.hasMorePage = (productArray.count < oldProducts.total) ? true : false
-        }
-        else {
+        } else {
             self.hasMorePage = false
         }
     }
@@ -99,7 +98,6 @@ class ProductListViewModel {
                                     product: ProductCart) -> Void {
         guard let productCartListViewModel = self.productCartListViewModel
         else { return }
-        
         if isRemove {
             productCartListViewModel.removeFromCart(product)
         } else {
@@ -112,7 +110,8 @@ class ProductListViewModel {
     }
     
     func getProductListBasedOnCartItems() -> [Product] {
-        guard let cartProducts = self.productCartListViewModel?.productCarts?.products else { return [] }
+        guard let cartProducts = self.productCartListViewModel?.productCarts?.products
+        else { return [] }
         let cartProductIDs = cartProducts.map { $0.id }
         return self.productArray.filter { cartProductIDs.contains($0.id) }
     }

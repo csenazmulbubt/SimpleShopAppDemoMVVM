@@ -102,7 +102,8 @@ extension ProductListVC: ProductListViewDelegate {
 extension ProductListVC {
     func gotoCartListVC() -> Void {
         let vc = AppStoryboard.Main.viewController(vc: ProductCartListVC.self)
-        vc.productListViewModel = self.productListViewModel
+        vc.productCartListViewModel = self.productListViewModel.productCartListViewModel
+        vc.productList = self.productListViewModel.getProductListBasedOnCartItems()
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

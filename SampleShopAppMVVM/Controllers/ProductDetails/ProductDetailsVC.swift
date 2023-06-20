@@ -29,6 +29,6 @@ class ProductDetailsVC: UIViewController {
 //MARK: - ProductDetailsViewDelegate
 extension ProductDetailsVC: ProductDetailsViewDelegate {
     func tappedOnBackButton() {
-        self.navigationController?.popViewController(animated: true)
+        self.popViewController()
     }
 }

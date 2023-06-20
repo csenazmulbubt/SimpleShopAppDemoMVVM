@@ -63,6 +63,10 @@ class ProductCartTableViewCell: UITableViewCell {
             productImageView.setImage(with: url)
         }
         
+        if let productCartResponse = productCartResponse {
+            print("Product Cart response",productCartResponse.id,
+                  productCartResponse.quantity)
+        }
         self.productTitleLable.text = "\(product?.title ?? "")"
         self.totalProductLabel.text = "\(productCartResponse?.quantity ?? 0)"
         self.currentPriceLabel.text = "\(productCartResponse?.discountedPrice ?? 0)"

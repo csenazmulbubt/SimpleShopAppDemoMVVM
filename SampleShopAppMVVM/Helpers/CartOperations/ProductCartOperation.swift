@@ -12,7 +12,7 @@ class ProductCartOperation: CartProtocol {
     private var items: [ProductCart] = []
     
     var cartItems: [ProductCart] {
-        return items
+        return items.sorted { $0.id < $1.id }
     }
     
     func addToCart(_ product: ProductCart) {
