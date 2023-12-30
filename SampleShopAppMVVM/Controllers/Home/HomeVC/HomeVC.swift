@@ -10,6 +10,7 @@ import Kingfisher
 
 class HomeVC: UIViewController {
 
+    let networkService = NetworkService()
     override func viewDidLoad() {
         super.viewDidLoad()
         //KingfisherManager.shared.cache.memoryStorage.config.totalCostLimit = 30_000
@@ -29,6 +30,19 @@ class HomeVC: UIViewController {
         case 2001:
             self.pushSearchProductListVC()
         default:
+            print("Namul")
+            //https://dummyjson.com/products
+            //https://appstaflix.com/Shamim/api/home
+            let surl = URL(string: "https://appstaflix.com/Shamim/api/home")
+            
+            var urlRequest = URLRequest(url: surl!)
+            urlRequest.httpMethod = HTTPMethod.get.rawValue
+            let headers: [String: String] = ["Content-Type": "application/json", "Access-Control-Allow-Origin": "https://appstaflix.com",  "Access-Control-Allow-Headers": "*", "Access-Control-Allow-Methods": "*"]
+            headers.forEach { key,Value in
+                urlRequest.addValue(Value, forHTTPHeaderField: key)
+            }
+            
+            networkService.sendGetRequest(URLReuquestBuilder: urlRequest)
             break
         }
     }
